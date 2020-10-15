@@ -8,13 +8,19 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ProductsComponent,
+    AboutUsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

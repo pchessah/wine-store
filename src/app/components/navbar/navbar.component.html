@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-    <a class="navbar-brand" [routerLink]="'.'">Sports Store</a>
+    <a class="navbar-brand" [routerLink]="'/'">Sports Store</a>
   
     <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
       &#9776;
@@ -7,13 +7,13 @@
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Products</a>
+          <a class="nav-link" [routerLink]="'/products'" (click)="isMenuCollapsed = true">Products</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">About</a>
+            <a class="nav-link" [routerLink]="'/about-us'" (click)="isMenuCollapsed = true">About</a>
           </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Cart</a>
+          <a class="nav-link" [routerLink]="'/cart'" (click)="isMenuCollapsed = true">Cart</a>
         </li>
   
       </ul>
