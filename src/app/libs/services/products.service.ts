@@ -27,14 +27,16 @@ export class ProductsService {
     return throwError(errorMessage);
   }
 
-
-
-
   getAllProducts(): Observable<IProducts[]>{
     return this.http.get<IProducts[]>(this.productsUrl).pipe(
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     );
+  }
+
+  getSingleProduct( id: number): Observable<IProducts>{
+    const url = `${this.productsUrl}/${id}`;
+    return this.http.get<IProducts>(url);
   }
 
 
