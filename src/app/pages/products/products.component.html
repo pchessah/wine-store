@@ -1,7 +1,9 @@
 <div class="d-flex align-items-center justify-content-center"> Sports Goods </div>
-<div class="container" *ngFor="let single-product of products">
-    <div class="card">
-        {{single-product.name}}
+<div class="container">
+    <div class="card col-4" *ngFor="let singleProduct of products">
+        <div class="card-header">
+            {{singleProduct.name }}
+        </div>
     </div>
 
 </div>
