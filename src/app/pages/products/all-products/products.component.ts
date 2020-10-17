@@ -3,6 +3,7 @@ import { IProducts } from 'src/app/libs/interfaces/iproducts';
 import { ProductsService } from 'src/app/libs/services/products.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CartModalComponent } from 'src/app/components/products/cart-modal/cart-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -15,10 +16,14 @@ export class ProductsComponent implements OnInit {
   singleProduct: IProducts;
 
 
-  constructor(private _productsService: ProductsService, public dialog: MatDialog) { }
+  constructor(private _productsService: ProductsService, public dialog: MatDialog, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllProducts();
+  }
+
+  showSuccess(singleProduct) {
+    this.toastr.success( `${singleProduct} added to cart.`);
   }
 
   getAllProducts(): void {
@@ -30,6 +35,7 @@ export class ProductsComponent implements OnInit {
   addToCart(id): void {
     this._productsService.getSingleProduct(id).subscribe(singleProduct =>{
       this.singleProduct = singleProduct;
+      this.showSuccess(this.singleProduct.name);
       const dialogRef = this.dialog.open(CartModalComponent, {
         width: '550px',
         data: this.singleProduct,
