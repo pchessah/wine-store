@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "sports-store-c1ca4": {
+      "hosting": {
+        "sport-store": [
+          "sports-store-c1ca4"
+        ]
+      }
+    }
+  }
+}

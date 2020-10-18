@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { IProducts } from '../interfaces/iproducts';
@@ -11,6 +11,7 @@ export class ProductsService {
 
   products: IProducts[];
   productsUrl="api/products";
+  httpOptions = { headers: new HttpHeaders({"Content-type": "application/json"})}
 
   constructor( private http: HttpClient ) { }
 
@@ -34,9 +35,25 @@ export class ProductsService {
     );
   }
 
+  getCartProducts(): Observable<IProducts[]>{
+    return this.http.get<IProducts[]>(this.productsUrl).pipe(
+      tap(data => console.log(JSON.stringify(data))),
+      catchError(this.handleError)
+    );    
+  }
+
   getSingleProduct( id: number): Observable<IProducts>{
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<IProducts>(url);
+  }
+
+
+  addToCart(cartProduct:IProducts): Observable<IProducts>{
+    return this.http.post<IProducts>(this.productsUrl, cartProduct, this.httpOptions).pipe(
+      tap(data => console.log(JSON.stringify(data))),
+      catchError(this.handleError)
+    )
+
   }
 
 

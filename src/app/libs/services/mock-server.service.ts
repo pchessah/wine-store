@@ -51,6 +51,8 @@ export class MockServerService implements InMemoryDbService {
       }
     ]
 
-    return { products }
+    const cart = [];
+
+    return { products, cart }
   }
 }
