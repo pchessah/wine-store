@@ -24,6 +24,9 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 
 
@@ -49,7 +52,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(MockServerService, { dataEncapsulation: false })
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
+    //HttpClientInMemoryWebApiModule.forRoot(MockServerService, { dataEncapsulation: false })
   ],
   providers: [],
   bootstrap: [AppComponent]

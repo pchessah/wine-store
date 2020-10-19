@@ -2,7 +2,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { IProducts } from '../interfaces/iproducts';
-import { tap, catchError } from "rxjs/operators"
+import { tap, catchError } from "rxjs/operators";
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ProductsModel } from "../models/products-model"
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class ProductsService {
   productsUrl="api/products";
   httpOptions = { headers: new HttpHeaders({"Content-type": "application/json"})}
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private firestore: AngularFirestore ) { }
 
   handleError(err: HttpErrorResponse){
     let errorMessage = "";
@@ -28,12 +30,20 @@ export class ProductsService {
     return throwError(errorMessage);
   }
 
-  getAllProducts(): Observable<IProducts[]>{
-    return this.http.get<IProducts[]>(this.productsUrl).pipe(
-      tap(data => console.log(JSON.stringify(data))),
-      catchError(this.handleError)
-    );
+  getAllProducts(){
+  return this.firestore.collection("products").snapshotChanges().pipe(
+    tap(data => console.log(data)),
+    catchError(this.handleError)
+  );    
+
   }
+
+  // getAllProducts(): Observable<IProducts[]>{
+  //   return this.http.get<IProducts[]>(this.productsUrl).pipe(
+  //     tap(data => console.log(JSON.stringify(data))),
+  //     catchError(this.handleError)
+  //   );
+  // }
 
   getCartProducts(): Observable<IProducts[]>{
     return this.http.get<IProducts[]>(this.productsUrl).pipe(
