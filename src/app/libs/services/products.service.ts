@@ -34,8 +34,11 @@ export class ProductsService {
   return this.firestore.collection("products").snapshotChanges().pipe(
     tap(data => console.log(data)),
     catchError(this.handleError)
-  );    
+    );  
+  }
 
+  addNewProduct(product: ProductsModel){
+    return this.firestore.collection("products").add(product)
   }
 
   // getAllProducts(): Observable<IProducts[]>{

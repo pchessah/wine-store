@@ -1,0 +1,15 @@
+<form  [formGroup]="productsForm" fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit()">
+    <input placeholder="product ID" type="text" formControlName="productId" required>
+    <input placeholder="Product Namne" type="text" formControlName="productName" required>
+    <select formControlName="category" required>
+        <option>Soccer</option>
+        <option>Swimming</option>
+        <option>Others</option>
+    </select>
+    <input type="text" placeholder="image url" formControlName="imgUrl" required>
+    <input type="number" placeholder="price" formControlName="price" required>
+    <button type="submit" [disabled]="!productsForm.valid">
+        Save
+    </button>
+</form>
+

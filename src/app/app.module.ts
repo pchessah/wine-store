@@ -27,6 +27,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { NewProductsComponent } from './admin/new-products/new-products.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -40,6 +43,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AboutUsComponent,
     CartComponent,
     CartModalComponent,
+    NewProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     MatButtonModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule
     //HttpClientInMemoryWebApiModule.forRoot(MockServerService, { dataEncapsulation: false })
