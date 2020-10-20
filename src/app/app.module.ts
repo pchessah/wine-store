@@ -25,10 +25,12 @@ import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule,  } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NewProductsComponent } from './admin/new-products/new-products.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireStorageModule} from '@angular/fire/storage';
+
 
 
 
@@ -57,7 +59,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     AngularFireDatabaseModule
     //HttpClientInMemoryWebApiModule.forRoot(MockServerService, { dataEncapsulation: false })
   ],

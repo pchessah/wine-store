@@ -4,7 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { IProducts } from '../interfaces/iproducts';
 import { tap, catchError } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ProductsModel } from "../models/products-model"
+import { ProductsModel } from "../models/products-model";
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ProductsService {
   productsUrl="api/products";
   httpOptions = { headers: new HttpHeaders({"Content-type": "application/json"})}
 
-  constructor( private http: HttpClient, private firestore: AngularFirestore ) { }
+  constructor( private http: HttpClient, private firestore: AngularFirestore,  private fireStorage: AngularFireStorage ) { }
 
   handleError(err: HttpErrorResponse){
     let errorMessage = "";
@@ -53,6 +54,13 @@ export class ProductsService {
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     );    
+  }
+
+  uploadSingleFile(event, n){
+    const file = event.target.files[0];
+    const task = this.fireStorage.upload(`productImages/${n}`, file);
+    return task.snapshotChanges()
+
   }
 
   getSingleProduct( id: number): Observable<IProducts>{
