@@ -23,12 +23,14 @@ export class NewProductsComponent implements OnInit {
     price:[""],
   })
 
-  selectedFile: File = null;
+  
+
   downloadURL: Observable<string>;
   fileUrl;
   n = Date.now();
   filePath = `productImages/${this.n}`;
-  fileRef = this.storage.ref(this.filePath)
+  fileRef = this.storage.ref(this.filePath);
+  uploadProgress$: Observable<number>;
   
 
   product: ProductsModel;
@@ -44,19 +46,20 @@ export class NewProductsComponent implements OnInit {
   onSubmit(): void{
     this.product = this.productsForm.value; 
     this.productsService.addNewProduct(this.product); 
-    this.showSuccess(this.product.name);
-console.log(this.product);
+    this.showSuccess(this.product.productName);
     this.closeDialogue();
   }
 
   onFileSelected( event ){
    this.productsService.uploadSingleFile(event, this.n).subscribe({complete: ()=>{
      this.downloadURL = this.fileRef.getDownloadURL();
+  
      this.downloadURL.subscribe(url => {
        if(url){
          this.fileUrl = url;
          this.productsForm.patchValue({ imgUrl: this.fileUrl })
-         this.product = this.productsForm.value;   
+         this.product = this.productsForm.value;
+   
        }
      })
    }})

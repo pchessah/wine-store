@@ -27,7 +27,7 @@
         </div>  
     </form>
     <div fxLayout="row" fxLayoutAlign="space-evenly center" >
-        <button (click)="onSubmit()" class="btn btn-success" type="submit" [disabled]="!productsForm.valid">
+        <button (click)="onSubmit()" class="btn btn-success" type="submit" [disabled]="!productsForm.valid && productsForm.value">
             Save
         </button>    
         <button (click)="cancel()" class="btn btn-danger">
