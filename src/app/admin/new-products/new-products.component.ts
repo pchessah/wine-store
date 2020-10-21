@@ -15,15 +15,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NewProductsComponent implements OnInit {
 
-  productsForm =  this.fb.group({
+  productsForm = this.fb.group({
     productId: [''],
     productName: [""],
     category: [""],
-    imgUrl:[""],
-    price:[""],
+    imgUrl: [""],
+    price: [""],
   })
 
-  
+
 
   downloadURL: Observable<string>;
   fileUrl;
@@ -31,54 +31,65 @@ export class NewProductsComponent implements OnInit {
   filePath = `productImages/${this.n}`;
   fileRef = this.storage.ref(this.filePath);
   uploadProgress$: Observable<number>;
-  
-
+  selectedImg = "../../../assets/images/no-preview-available.png";
+  checkImgUpload = false;
   product: ProductsModel;
 
-  constructor( private fb: FormBuilder,
-               private productsService: ProductsService,
-               private storage: AngularFireStorage,
-               public dialogRef: MatDialogRef<NewProductsComponent>,
-               private toastr: ToastrService) { }
+
+  checker(): void {
+    this.selectedImg == "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" ||
+                                                                                   this.selectedImg == "../../../assets/images/no-preview-available.png" 
+                                                                                   ? this.checkImgUpload = false : this.checkImgUpload = true 
+                                                                                   }
+
+  constructor(private fb: FormBuilder,
+    private productsService: ProductsService,
+    private storage: AngularFireStorage,
+    public dialogRef: MatDialogRef<NewProductsComponent>,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void { }
 
-  onSubmit(): void{
-    this.product = this.productsForm.value; 
-    this.productsService.addNewProduct(this.product); 
+  onSubmit(): void {
+    this.product = this.productsForm.value;
+    this.productsService.addNewProduct(this.product);
     this.showSuccess(this.product.productName);
     this.closeDialogue();
   }
 
-  onFileSelected( event ){
-   this.productsService.uploadSingleFile(event, this.n).subscribe({complete: ()=>{
-     this.downloadURL = this.fileRef.getDownloadURL();
-  
-     this.downloadURL.subscribe(url => {
-       if(url){
-         this.fileUrl = url;
-         this.productsForm.patchValue({ imgUrl: this.fileUrl })
-         this.product = this.productsForm.value;
-   
-       }
-     })
-   }})
+  onFileSelected(event) {
+    this.selectedImg = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+    this.productsService.uploadSingleFile(event, this.n).subscribe({
+      complete: () => {
+        this.downloadURL = this.fileRef.getDownloadURL();
+
+        this.downloadURL.subscribe(url => {
+          if (url) {
+            this.fileUrl = url;
+            this.productsForm.patchValue({ imgUrl: this.fileUrl })
+            this.product = this.productsForm.value;
+            this.selectedImg = this.fileUrl;
+            this.checker();
+          }
+        })
+      }
+    })
   }
 
-  closeDialogue(): void{
+  closeDialogue(): void {
     this.dialogRef.close();
   }
 
   showSuccess(product) {
-    this.toastr.success( `${product} saved.`);
+    this.toastr.success(`${product} saved.`);
   }
 
-  cancel(): void{
+  cancel(): void {
     this.productsForm.reset();
     this.closeDialogue();
   }
 
 
-  }
+}
 
 
