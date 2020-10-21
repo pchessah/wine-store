@@ -1,15 +1,16 @@
 <mat-card>
-    <mat-card-header>
+    <mat-card-header class="card-header">
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title> {{singleProduct.name}} </mat-card-title>
+      <mat-card-title > {{singleProduct.productName}} </mat-card-title>
     </mat-card-header>
     <img mat-card-image [src]="singleProduct.imgUrl" alt="product-image">
-    <mat-card-content>
+    <mat-card-content class="card-body">
+      <strong>Description: </strong>
       <p>
         {{singleProduct.description}}
       </p>
     </mat-card-content>
-    <mat-card-actions  fxLayout="row" fxLayoutAlign="space-around center" >
+    <mat-card-actions class="card-footer"  fxLayout="row" fxLayoutAlign="space-around center" >
       <button mat-raised-button class="btn btn-success">Go to cart</button>
       <button mat-raised-button color="primary">Continue Shopping</button>
     </mat-card-actions>

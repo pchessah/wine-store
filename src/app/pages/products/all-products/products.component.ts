@@ -14,7 +14,7 @@ import { ProductsModel } from 'src/app/libs/models/products-model';
 export class ProductsComponent implements OnInit {
 
   products: ProductsModel[];
-  singleProduct: ProductsModel;
+  singleProduct: any;
   cart: IProducts[] = [];
 
 
@@ -37,27 +37,19 @@ export class ProductsComponent implements OnInit {
           id: e.payload.doc.id,
           ...e.payload.doc.data() as {}
         } as ProductsModel
-      })
-      
+      })      
     });
   }
 
   addToCart(id): void {
-    //   this._productsService.getSingleProduct(id).subscribe(singleProduct =>{
-    //   this.singleProduct = singleProduct;
-    //   this.showSuccess(this.singleProduct.name);
-    //   this._productsService.addToCart(this.singleProduct);
-    //   this.cart.push(this.singleProduct);
-    //   debugger;
-    //   const dialogRef = this.dialog.open(CartModalComponent, {
-    //     width: '550px',
-    //     data: this.singleProduct,
-    //   });  
-    //   dialogRef.afterClosed().subscribe(result => {
-    //     console.log('The dialog was closed', result);
-    //   });
-    // })   
-
+    this._productsService.getSingleProduct(id).subscribe(singleProduct=>{
+      this.singleProduct =  singleProduct;
+      const dialogRef = this.dialog.open(CartModalComponent, {
+        width: "500px",
+        data: this.singleProduct
+      })
+     
+    })  
   }
 
 }

@@ -33,9 +33,15 @@ export class ProductsService {
 
   getAllProducts(){
   return this.firestore.collection("products").snapshotChanges().pipe(
-    tap(data => console.log(data)),
     catchError(this.handleError)
     );  
+  }
+
+  getSingleProduct(id: string){
+    return this.firestore.collection("products").doc(id).valueChanges().pipe(
+      catchError(this.handleError)
+    )                                     
+  
   }
 
   addNewProduct(product: ProductsModel){
@@ -65,10 +71,10 @@ export class ProductsService {
 
   }
 
-  getSingleProduct( id: number): Observable<IProducts>{
-    const url = `${this.productsUrl}/${id}`;
-    return this.http.get<IProducts>(url);
-  }
+  // getSingleProduct( id: number): Observable<IProducts>{
+  //   const url = `${this.productsUrl}/${id}`;
+  //   return this.http.get<IProducts>(url);
+  // }
 
 
   addToCart(cartProduct:IProducts): Observable<IProducts>{
