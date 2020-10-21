@@ -4,7 +4,7 @@ import { ProductsModel } from 'src/app/libs/models/products-model';
 import { ProductsService } from 'src/app/libs/services/products.service';
 import { AngularFireStorage } from "@angular/fire/storage"
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { v4 as uniqueId } from "uuid";
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 
@@ -21,10 +21,12 @@ export class NewProductsComponent implements OnInit {
     category: [""],
     imgUrl: [""],
     price: [""],
+    description:[""]
   })
 
 
 
+  id: number;
   downloadURL: Observable<string>;
   fileUrl;
   n = Date.now();
@@ -36,13 +38,7 @@ export class NewProductsComponent implements OnInit {
   product: ProductsModel;
 
 
-  checker(): void {
-    this.selectedImg == "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" ||
-                                                                                   this.selectedImg == "../../../assets/images/no-preview-available.png" 
-                                                                                   ? this.checkImgUpload = false : this.checkImgUpload = true 
-                                                                                   }
-
-  constructor(private fb: FormBuilder,
+   constructor(private fb: FormBuilder,
     private productsService: ProductsService,
     private storage: AngularFireStorage,
     public dialogRef: MatDialogRef<NewProductsComponent>,
@@ -50,23 +46,37 @@ export class NewProductsComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  //CHECK IF IMAGE HAS ALREADY UPLOADED SO AS TO SAVE
+  checker(): void {
+    this.selectedImg == "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" ||
+                                                                                   this.selectedImg == "../../../assets/images/no-preview-available.png" ?
+                                                                                   this.checkImgUpload = false : this.checkImgUpload = true 
+                                                                                   }
+
+  //CREATE NEW UNIQUE ID
+  getId(): void{
+    this.id = uniqueId();   
+  }
+
   onSubmit(): void {
+    this.getId();
+    this.productsForm.controls["productId"].setValue(this.id)
     this.product = this.productsForm.value;
     this.productsService.addNewProduct(this.product);
     this.showSuccess(this.product.productName);
     this.closeDialogue();
   }
 
+  //UPLOAD IMAGE TO FIREBASE, RETRIEVE URL AND USE IT
   onFileSelected(event) {
     this.selectedImg = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
     this.productsService.uploadSingleFile(event, this.n).subscribe({
       complete: () => {
         this.downloadURL = this.fileRef.getDownloadURL();
-
         this.downloadURL.subscribe(url => {
           if (url) {
             this.fileUrl = url;
-            this.productsForm.patchValue({ imgUrl: this.fileUrl })
+            this.productsForm.patchValue({ imgUrl: this.fileUrl });
             this.product = this.productsForm.value;
             this.selectedImg = this.fileUrl;
             this.checker();

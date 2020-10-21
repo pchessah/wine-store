@@ -56,6 +56,8 @@ export class ProductsService {
     );    
   }
 
+  
+  //UPLOAD FUNCTION
   uploadSingleFile(event, n){
     const file = event.target.files[0];
     const task = this.fireStorage.upload(`productImages/${n}`, file);
