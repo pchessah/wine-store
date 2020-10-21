@@ -1,15 +1,37 @@
-<form  [formGroup]="productsForm" fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit()">
-    <input placeholder="product ID" type="text" formControlName="productId" required>
-    <input placeholder="Product Namne" type="text" formControlName="productName" required>
-    <select formControlName="category" required>
-        <option>Soccer</option>
-        <option>Swimming</option>
-        <option>Others</option>
-    </select>
-    <input type="file" placeholder="image url"  required (change)="onFileSelected($event)">
-    <input type="number" placeholder="price" formControlName="price" required>
-    <button type="submit" [disabled]="!productsForm.valid">
-        Save
-    </button>
-</form>
+<div class="card-body">
+    <form [formGroup]="productsForm" fxLayout="column" fxLayoutAlign="center" (ngSubmit)="onSubmit()">
 
+        <!-- <input placeholder="product ID" type="text" formControlName="productId" required> -->
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label>Product Name:</label>
+            <input type="text" formControlName="productName" required>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label>Product Category:</label>
+            <select formControlName="category" required>
+                <option>Soccer</option>
+                <option>Swimming</option>
+                <option>Others</option>
+            </select>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label>Product Image:</label>
+            <input type="file" required (change)="onFileSelected($event)">
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label>Product Price(Ksh):</label>
+            <input type="number" formControlName="price" required>
+        </div>  
+    </form>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" >
+        <button (click)="onSubmit()" class="btn btn-success" type="submit" [disabled]="!productsForm.valid">
+            Save
+        </button>    
+        <button (click)="cancel()" class="btn btn-danger">
+            Cancel
+        </button>
+    </div>
+</div>

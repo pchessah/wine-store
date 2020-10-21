@@ -5,6 +5,8 @@ import { ProductsService } from 'src/app/libs/services/products.service';
 import { AngularFireStorage } from "@angular/fire/storage"
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-products',
@@ -33,13 +35,18 @@ export class NewProductsComponent implements OnInit {
 
   constructor( private fb: FormBuilder,
                private productsService: ProductsService,
-               private storage: AngularFireStorage) { }
+               private storage: AngularFireStorage,
+               public dialogRef: MatDialogRef<NewProductsComponent>,
+               private toastr: ToastrService) { }
 
   ngOnInit(): void { }
 
   onSubmit(): void{
     this.product = this.productsForm.value; 
-    this.productsService.addNewProduct(this.product);  
+    this.productsService.addNewProduct(this.product); 
+    this.showSuccess(this.product.name);
+console.log(this.product);
+    this.closeDialogue();
   }
 
   onFileSelected( event ){
@@ -49,12 +56,25 @@ export class NewProductsComponent implements OnInit {
        if(url){
          this.fileUrl = url;
          this.productsForm.patchValue({ imgUrl: this.fileUrl })
-         this.product = this.productsForm.value
-         console.log(this.product);
+         this.product = this.productsForm.value;   
        }
      })
    }})
   }
+
+  closeDialogue(): void{
+    this.dialogRef.close();
+  }
+
+  showSuccess(product) {
+    this.toastr.success( `${product} saved.`);
+  }
+
+  cancel(): void{
+    this.productsForm.reset();
+    this.closeDialogue();
+  }
+
 
   }
 

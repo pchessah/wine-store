@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewProductsComponent } from './admin/new-products/new-products.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CartComponent } from './pages/cart/cart.component';
@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: "products", component: ProductsComponent},
   {path: "about-us", component: AboutUsComponent},
   {path: "cart", component: CartComponent},
-  {path: "admin", component: NewProductsComponent},
+  {path: "admin", component: DashboardComponent},
   {path:"", redirectTo: "/home" , pathMatch: "full"},
   {path:"**", component: ErrorPageComponent},
   

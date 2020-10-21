@@ -30,6 +30,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NewProductsComponent } from './admin/new-products/new-products.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireStorageModule} from '@angular/fire/storage';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 
 
@@ -46,6 +47,7 @@ import { AngularFireStorageModule} from '@angular/fire/storage';
     CartComponent,
     CartModalComponent,
     NewProductsComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

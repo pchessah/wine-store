@@ -18,7 +18,9 @@ export class ProductsComponent implements OnInit {
   cart: IProducts[] = [];
 
 
-  constructor(private _productsService: ProductsService, public dialog: MatDialog, private toastr: ToastrService) { }
+  constructor(private _productsService: ProductsService,
+              public dialog: MatDialog,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllProducts();
