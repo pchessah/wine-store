@@ -1,17 +1,21 @@
-<mat-card>
-    <mat-card-header class="card-header">
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title > {{singleProduct.productName}} </mat-card-title>
-    </mat-card-header>
-    <img mat-card-image [src]="singleProduct.imgUrl" alt="product-image">
-    <mat-card-content class="card-body">
-      <strong>Description: </strong>
-      <p>
-        {{singleProduct.description}}
-      </p>
-    </mat-card-content>
-    <mat-card-actions class="card-footer"  fxLayout="row" fxLayoutAlign="space-around center" >
-      <button mat-raised-button class="btn btn-success">Go to cart</button>
-      <button mat-raised-button color="primary">Continue Shopping</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="card" fxLayout="column" fxLayoutAlign="center center">
+  <div class="card-header">
+    {{singleProduct.productName}}
+  </div>
+  <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+    <img [src]="singleProduct.imgUrl" alt="product-image">
+    <strong>Description: </strong>
+    <p>
+      {{singleProduct.description}}
+    </p>
+  </div>
+  <div class="card-footer" fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button class="btn btn-success">Go to cart</button>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <button type="button" class="btn btn-secondary btn-sm">-</button>
+      <span>1</span>
+      <button type="button" class="btn btn-secondary btn-sm">+</button>
+    </div>
+    <button mat-raised-button color="primary">Continue Shopping</button>
+  </div>
+</div>

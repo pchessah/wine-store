@@ -15,7 +15,7 @@ export class ProductsComponent implements OnInit {
 
   products: ProductsModel[];
   singleProduct: any;
-  cart: IProducts[] = [];
+  cart: ProductsModel[] = [];
 
 
   constructor(private _productsService: ProductsService,
@@ -42,14 +42,16 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(id): void {
-    this._productsService.getSingleProduct(id).subscribe(singleProduct=>{
+    this._productsService.getSingleProduct(id).subscribe(singleProduct=>{  
       this.singleProduct =  singleProduct;
+      this.cart = [...this.cart, this.singleProduct] 
+      this.showSuccess(this.singleProduct.productName);
       const dialogRef = this.dialog.open(CartModalComponent, {
         width: "500px",
         data: this.singleProduct
-      })
-     
-    })  
+      })     
+    }) 
+   
   }
 
 }
