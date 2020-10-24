@@ -10,12 +10,12 @@
     </p>
   </div>
   <div class="card-footer" fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-raised-button class="btn btn-success">Go to cart</button>
+    <button mat-raised-button class="btn btn-success" (click)="goToCart()"> Go to cart</button>
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <button type="button" class="btn btn-secondary btn-sm">-</button>
       <span>1</span>
       <button type="button" class="btn btn-secondary btn-sm">+</button>
     </div>
-    <button mat-raised-button color="primary">Continue Shopping</button>
+    <button mat-raised-button color="primary" (click)="close()">Continue Shopping</button>
   </div>
 </div>

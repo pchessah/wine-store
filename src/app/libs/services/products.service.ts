@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { IProducts } from '../interfaces/iproducts';
 import { tap, catchError } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -10,18 +10,41 @@ import { AngularFireStorage } from '@angular/fire/storage';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class ProductsService implements OnInit{
 
   products: IProducts[];
-  productsUrl="api/products";
-  httpOptions = { headers: new HttpHeaders({"Content-type": "application/json"})}
+  productsUrl = "api/products";
+  httpOptions = { headers: new HttpHeaders({ "Content-type": "application/json" }) };
+  cart: [] = []
+  private cartSource =  new BehaviorSubject(this.cart);
+  currentCart = this.cartSource.asObservable();
 
-  constructor( private http: HttpClient, private firestore: AngularFirestore,  private fireStorage: AngularFireStorage ) { }
+  constructor(private http: HttpClient, private firestore: AngularFirestore, private fireStorage: AngularFireStorage) {
+    this.currentCart.subscribe(cart => this.cart = cart);
+  
+   }
 
-  handleError(err: HttpErrorResponse){
+  ngOnInit(): void{ }
+
+  updateCart(cart: []){
+    this.cartSource.next(cart)
+  }
+
+  calculateCart(cart: [], counter) {
+    cart.forEach(function (obj) {
+      let key = JSON.stringify(obj);
+      counter[key] = (counter[key] || 0) + 1;
+      return counter
+    })
+    this.cart= [...cart],
+    this.updateCart(this.cart)
+  }
+
+
+  handleError(err: HttpErrorResponse) {
     let errorMessage = "";
     //check if error is on the client side
-    if(err.error instanceof ErrorEvent){
+    if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occured: ${err.error.message}`
     } else {
       //else error is server side
@@ -31,20 +54,20 @@ export class ProductsService {
     return throwError(errorMessage);
   }
 
-  getAllProducts(){
-  return this.firestore.collection("products").snapshotChanges().pipe(
-    catchError(this.handleError)
-    );  
+  getAllProducts() {
+    return this.firestore.collection("products").snapshotChanges().pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getSingleProduct(id: string){
+  getSingleProduct(id: string) {
     return this.firestore.collection("products").doc(id).valueChanges().pipe(
       catchError(this.handleError)
-    )                                     
-  
+    )
+
   }
 
-  addNewProduct(product: ProductsModel){
+  addNewProduct(product: ProductsModel) {
     return this.firestore.collection("products").add(product)
   }
 
@@ -55,16 +78,16 @@ export class ProductsService {
   //   );
   // }
 
-  getCartProducts(): Observable<IProducts[]>{
+  getCartProducts(): Observable<IProducts[]> {
     return this.http.get<IProducts[]>(this.productsUrl).pipe(
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
-    );    
+    );
   }
 
-  
+
   //UPLOAD FUNCTION
-  uploadSingleFile(event, n){
+  uploadSingleFile(event, n) {
     const file = event.target.files[0];
     const task = this.fireStorage.upload(`productImages/${n}`, file);
     return task.snapshotChanges()
@@ -77,13 +100,15 @@ export class ProductsService {
   // }
 
 
-  addToCart(cartProduct:IProducts): Observable<IProducts>{
+  addToCart(cartProduct: IProducts): Observable<IProducts> {
     return this.http.post<IProducts>(this.productsUrl, cartProduct, this.httpOptions).pipe(
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     )
-
   }
+
+
+
 
 
 }
