@@ -17,14 +17,14 @@ export class CartComponent implements OnInit {
     this.productsService.currentCart.subscribe(cart=>{
       this.cart = cart;
       console.log(this.cart);
-
+      this.dataSource = new MatTableDataSource(this.cart);
     })
 
    
   }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  //dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['productName', 'number', 'price', 'total'];
+  dataSource;
 
   applyFilter(event: Event) {
     // const filterValue = (event.target as HTMLInputElement).value;

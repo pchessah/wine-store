@@ -19,6 +19,7 @@ import { CartModalComponent } from './components/products/cart-modal/cart-modal.
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -56,6 +57,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     MatDialogModule,
     MatCardModule,
     MatButtonModule,
+    MatTableModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
