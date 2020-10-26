@@ -10,6 +10,8 @@ import { ProductsService } from 'src/app/libs/services/products.service';
 export class CartComponent implements OnInit {
 
   cart: [];
+  displayedColumns: string[] = ['productName', 'number', 'price', 'total'];
+  dataSource;
 
   constructor( private productsService: ProductsService) { }
 
@@ -18,17 +20,10 @@ export class CartComponent implements OnInit {
       this.cart = cart;
       console.log(this.cart);
       this.dataSource = new MatTableDataSource(this.cart);
-    })
-
-   
+    })   
   }
 
-  displayedColumns: string[] = ['productName', 'number', 'price', 'total'];
-  dataSource;
 
-  applyFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+
 
 }
