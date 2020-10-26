@@ -36,6 +36,8 @@ export class ProductsService implements OnInit{
       counter[key] = (counter[key] || 0) + 1;
       return counter
     })
+    console.log(Object.keys(counter));
+   // console.log(counter);
     this.cart= [...cart],
     this.updateCart(this.cart)
   }

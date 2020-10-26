@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { MockServerService } from "./libs/services/mock-server.service";
  
 import { ToastrModule } from 'ngx-toastr';
 
@@ -64,7 +62,6 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     AngularFireDatabaseModule
-    //HttpClientInMemoryWebApiModule.forRoot(MockServerService, { dataEncapsulation: false })
   ],
   providers: [],
   bootstrap: [AppComponent]
