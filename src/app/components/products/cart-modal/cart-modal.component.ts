@@ -27,7 +27,7 @@ export class CartModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.currentCart.subscribe(cart => this.cart = cart)
+   // this.productService.currentCart.subscribe(cart => this.cart = cart)
   }
 
   goToCart(): void {

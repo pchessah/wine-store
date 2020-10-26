@@ -1,8 +1,7 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { IProducts } from '../interfaces/iproducts';
-import { tap, catchError } from "rxjs/operators";
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductsModel } from "../models/products-model";
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -13,14 +12,14 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class ProductsService implements OnInit {
 
   products: ProductsModel[];
-  singleProduct: ProductsModel = {price: 0, productName: "", description:"", id:"", imgUrl:"", category:""};
+  singleProduct: ProductsModel = null;
   cart: ProductsModel[] = []
-  private singleProductSource = new BehaviorSubject(this.singleProduct)
-  private cartSource = new BehaviorSubject(this.cart);
+  private singleProductSource = new BehaviorSubject<ProductsModel>(this.singleProduct)
+  private cartSource = new BehaviorSubject<ProductsModel[]>(this.cart);
   currentCart = this.cartSource.asObservable();
   currentSingleProduct = this.singleProductSource.asObservable();
 
-  constructor(private http: HttpClient, private firestore: AngularFirestore, private fireStorage: AngularFireStorage) { }
+  constructor(private firestore: AngularFirestore, private fireStorage: AngularFireStorage) { }
 
   ngOnInit(): void { }
 
@@ -38,8 +37,6 @@ export class ProductsService implements OnInit {
       counter[key] = (counter[key] || 0) + 1;
       return counter
     })
-    // console.log(Object.keys(counter));
-    console.log(counter);
     this.cart = [...cart],
       this.updateCart(this.cart)
   }
@@ -80,8 +77,11 @@ export class ProductsService implements OnInit {
       this.singleProduct =  singleProduct;
       this.updateSingleProduct(this.singleProduct);
       this.cart = [...this.cart, this.singleProduct];
-      this.updateCart(this.cart) 
-    })    
+      this.updateCart(this.cart)      
+    })  
+    
+    
+   
   }
 
   //UPLOAD FUNCTION

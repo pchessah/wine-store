@@ -14,7 +14,7 @@ import { ProductsModel } from 'src/app/libs/models/products-model';
 export class ProductsComponent implements OnInit {
 
   products: ProductsModel[];
-  singleProduct: ProductsModel;
+  singleProduct: ProductsModel = this._productsService.singleProduct;
   cart: ProductsModel[] = this._productsService.cart;
 
 
@@ -45,21 +45,23 @@ export class ProductsComponent implements OnInit {
     this._productsService.addToCart(id);
     this._productsService.currentCart.subscribe(cart => {
       this.cart = cart;
+
     })
 
     this._productsService.currentSingleProduct.subscribe(singleProduct => {
-      this.singleProduct = singleProduct;
-      this.showSuccess(this.singleProduct.productName);
-      const dialogRef = this.dialog.open(CartModalComponent, {
-        width: "500px",
-        data: {
-          product: this.singleProduct,
-          cart: this.cart
-        }
-      })
-
+      if(singleProduct != null){
+        this.singleProduct = singleProduct;
+        this.showSuccess(this.singleProduct.productName);
+        const dialogRef = this.dialog.open(CartModalComponent, {
+          width: "500px",
+          data: {
+            product: this.singleProduct,
+            cart: this.cart
+          }
+        })
+      }
+ 
     })
-
 
   }
 
