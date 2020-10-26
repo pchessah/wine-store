@@ -13,7 +13,7 @@ import { ProductsService } from 'src/app/libs/services/products.service';
 
 export class CartModalComponent implements OnInit {
   singleProduct;
-  cart: [] = [];
+  cart: ProductsModel[] = [];
   cartWithcounter = {};
 
 
@@ -30,20 +30,18 @@ export class CartModalComponent implements OnInit {
     this.productService.currentCart.subscribe(cart => this.cart = cart)
   }
 
-  // calculateCart(cart: [], counter) {
-  //   cart.forEach(function (obj) {
-  //     let key = JSON.stringify(obj);
-  //     counter[key] = (counter[key] || 0) + 1;
-  //     console.log(counter);
-  //     return counter
-  //   })
-  // }
-
-  goToCart(): void{
+  goToCart(): void {
     this.close();
     this.productService.updateCart(this.cart)
-
     this.router.navigateByUrl("/cart")
+  }
+
+  addOneToCart(id): void {
+    this.productService.getSingleProduct(id).subscribe(singleProduct => {
+      this.singleProduct = singleProduct;
+      this.cart = [...this.cart, this.singleProduct]
+    })
+
   }
 
 

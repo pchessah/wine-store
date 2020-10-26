@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
+import { ProductsModel } from 'src/app/libs/models/products-model';
 import { ProductsService } from 'src/app/libs/services/products.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ProductsService } from 'src/app/libs/services/products.service';
 })
 export class CartComponent implements OnInit {
 
-  cart: [];
+  cart: ProductsModel[];
   displayedColumns: string[] = ['productName', 'number', 'price', 'total'];
   dataSource;
 
@@ -18,7 +19,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.productsService.currentCart.subscribe(cart=>{
       this.cart = cart;
-      console.log(this.cart);
       this.dataSource = new MatTableDataSource(this.cart);
     })   
   }

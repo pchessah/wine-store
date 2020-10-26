@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IProducts } from 'src/app/libs/interfaces/iproducts';
 import { ProductsService } from 'src/app/libs/services/products.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -14,37 +14,41 @@ import { ProductsModel } from 'src/app/libs/models/products-model';
 export class ProductsComponent implements OnInit {
 
   products: ProductsModel[];
-  singleProduct: any;
-  cart: ProductsModel[] = [];
+  singleProduct: ProductsModel;
+  cart: ProductsModel[] = this._productsService.cart;
 
 
   constructor(private _productsService: ProductsService,
-              public dialog: MatDialog,
-              private toastr: ToastrService) { }
+    public dialog: MatDialog,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllProducts();
   }
 
   showSuccess(singleProduct) {
-    this.toastr.success( `${singleProduct} added to cart.`);
+    this.toastr.success(`${singleProduct} added to cart.`);
   }
 
   getAllProducts(): void {
     this._productsService.getAllProducts().subscribe(products => {
-      this.products = products.map(e=>{
-        return{
+      this.products = products.map(e => {
+        return {
           id: e.payload.doc.id,
           ...e.payload.doc.data() as {}
         } as ProductsModel
-      })      
+      })
     });
   }
 
   addToCart(id): void {
-    this._productsService.getSingleProduct(id).subscribe(singleProduct=>{  
-      this.singleProduct =  singleProduct;
-      this.cart = [...this.cart, this.singleProduct]  
+    this._productsService.addToCart(id);
+    this._productsService.currentCart.subscribe(cart => {
+      this.cart = cart;
+    })
+
+    this._productsService.currentSingleProduct.subscribe(singleProduct => {
+      this.singleProduct = singleProduct;
       this.showSuccess(this.singleProduct.productName);
       const dialogRef = this.dialog.open(CartModalComponent, {
         width: "500px",
@@ -52,9 +56,12 @@ export class ProductsComponent implements OnInit {
           product: this.singleProduct,
           cart: this.cart
         }
-      })     
-    }) 
-   
+      })
+
+    })
+
+
   }
 
 }
+

@@ -10,36 +10,38 @@ import { AngularFireStorage } from '@angular/fire/storage';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService implements OnInit{
+export class ProductsService implements OnInit {
 
-  products: IProducts[];
-  productsUrl = "api/products";
-  httpOptions = { headers: new HttpHeaders({ "Content-type": "application/json" }) };
-  cart: [] = []
-  private cartSource =  new BehaviorSubject(this.cart);
+  products: ProductsModel[];
+  singleProduct: ProductsModel = {price: 0, productName: "", description:"", id:"", imgUrl:"", category:""};
+  cart: ProductsModel[] = []
+  private singleProductSource = new BehaviorSubject(this.singleProduct)
+  private cartSource = new BehaviorSubject(this.cart);
   currentCart = this.cartSource.asObservable();
+  currentSingleProduct = this.singleProductSource.asObservable();
 
-  constructor(private http: HttpClient, private firestore: AngularFirestore, private fireStorage: AngularFireStorage) {
-    this.currentCart.subscribe(cart => this.cart = cart);
-  
-   }
+  constructor(private http: HttpClient, private firestore: AngularFirestore, private fireStorage: AngularFireStorage) { }
 
-  ngOnInit(): void{ }
+  ngOnInit(): void { }
 
-  updateCart(cart: []){
+  updateCart(cart: ProductsModel[]) {
     this.cartSource.next(cart)
   }
 
-  calculateCart(cart: [], counter) {
+  updateSingleProduct(singleProduct: ProductsModel){
+    this.singleProductSource.next(singleProduct)
+  }
+
+  calculateCart(cart: ProductsModel[], counter) {
     cart.forEach(function (obj) {
       let key = JSON.stringify(obj);
       counter[key] = (counter[key] || 0) + 1;
       return counter
     })
-   // console.log(Object.keys(counter));
-   // console.log(counter);
-    this.cart= [...cart],
-    this.updateCart(this.cart)
+    // console.log(Object.keys(counter));
+    console.log(counter);
+    this.cart = [...cart],
+      this.updateCart(this.cart)
   }
 
 
@@ -73,20 +75,14 @@ export class ProductsService implements OnInit{
     return this.firestore.collection("products").add(product)
   }
 
-  // getAllProducts(): Observable<IProducts[]>{
-  //   return this.http.get<IProducts[]>(this.productsUrl).pipe(
-  //     tap(data => console.log(JSON.stringify(data))),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  getCartProducts(): Observable<IProducts[]> {
-    return this.http.get<IProducts[]>(this.productsUrl).pipe(
-      tap(data => console.log(JSON.stringify(data))),
-      catchError(this.handleError)
-    );
+  addToCart(id) {
+    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel )=>{  
+      this.singleProduct =  singleProduct;
+      this.updateSingleProduct(this.singleProduct);
+      this.cart = [...this.cart, this.singleProduct];
+      this.updateCart(this.cart) 
+    })    
   }
-
 
   //UPLOAD FUNCTION
   uploadSingleFile(event, n) {
@@ -95,20 +91,6 @@ export class ProductsService implements OnInit{
     return task.snapshotChanges()
 
   }
-
-  // getSingleProduct( id: number): Observable<IProducts>{
-  //   const url = `${this.productsUrl}/${id}`;
-  //   return this.http.get<IProducts>(url);
-  // }
-
-
-  addToCart(cartProduct: IProducts): Observable<IProducts> {
-    return this.http.post<IProducts>(this.productsUrl, cartProduct, this.httpOptions).pipe(
-      tap(data => console.log(JSON.stringify(data))),
-      catchError(this.handleError)
-    )
-  }
-
 
 
 
