@@ -12,10 +12,10 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class ProductsService implements OnInit {
 
   products: ProductsModel[];
-  singleProduct: ProductsModel=undefined;
-  cart: ProductsModel[]=[]
-  private singleProductSource = new BehaviorSubject<ProductsModel>(this.singleProduct)
-  private cartSource = new BehaviorSubject<ProductsModel[]>(this.cart);
+  singleProduct: ProductsModel = undefined;
+  cart: ProductsModel[] = []
+  private singleProductSource = new BehaviorSubject<ProductsModel>(null)
+  private cartSource = new BehaviorSubject<ProductsModel[]>([]);
   currentCart = this.cartSource.asObservable();
   currentSingleProduct = this.singleProductSource.asObservable();
 
@@ -27,7 +27,7 @@ export class ProductsService implements OnInit {
     this.cartSource.next(cart)
   }
 
-  updateSingleProduct(singleProduct: ProductsModel){
+  updateSingleProduct(singleProduct: ProductsModel) {
     this.singleProductSource.next(singleProduct)
   }
 
@@ -60,29 +60,31 @@ export class ProductsService implements OnInit {
       catchError(this.handleError)
     );
   }
+  
 
+  //GET SINGLE ITEM VIA ID
   getSingleProduct(id: string) {
     return this.firestore.collection("products").doc(id).valueChanges().pipe(
       catchError(this.handleError)
-    )
-
+    );
   }
 
+  //ADD NEW PRODUCT TO FIREBASE
   addNewProduct(product: ProductsModel) {
     return this.firestore.collection("products").add(product)
   }
 
+  //ADD ITEM TO CART
   addToCart(id) {
-    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel )=>{  
-      this.singleProduct =  singleProduct;
-      this.updateSingleProduct(this.singleProduct);
+    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel) => {
+     
+      if(this.singleProduct !== null || this.singleProduct !== undefined){
+        this.singleProduct = singleProduct;       
+        this.updateSingleProduct(this.singleProduct);     
         this.cart = [...this.cart, this.singleProduct];
-        this.updateCart(this.cart) ;
-        debugger;    
-    })  
-    
-    
-   
+        this.updateCart(this.cart);
+      }
+    })
   }
 
   //UPLOAD FUNCTION

@@ -13,7 +13,7 @@ import { ProductsModel } from 'src/app/libs/models/products-model';
 export class ProductsComponent implements OnInit {
 
   products: ProductsModel[];
-  singleProduct: ProductsModel;
+  singleProduct: ProductsModel = this._productsService.singleProduct;
   cart: ProductsModel[] = this._productsService.cart;
 
 
@@ -40,24 +40,23 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  //ADD ITEM TO CART, OPEN MODAL FOR THE ITEM
   addToCart(id): void {
     this._productsService.addToCart(id);
+
     this._productsService.currentCart.subscribe(cart => {
-      this.cart = cart;
-    })
+      if (cart.length > 0) {
+        this.cart = cart;
+        console.log(this.cart);
+      }
+    });
 
     this._productsService.currentSingleProduct.subscribe(singleProduct => {
-      this._productsService.currentCart.subscribe(cart => {
-        this.cart = cart;
-      })
-      this.singleProduct = singleProduct;
-      this.showSuccess(this.singleProduct?.productName);
-      const dialogRef = this.dialog.open(CartModalComponent, {
-        width: "500px"
-      })
-
+      if (singleProduct !== null && singleProduct !== undefined) {
+        this.singleProduct = singleProduct;
+        console.log(this.singleProduct);
+      }
     })
-
   }
 
 }

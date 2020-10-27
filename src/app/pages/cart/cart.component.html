@@ -1,5 +1,5 @@
 <div class="p-5">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="dataSource && cart.length;else notLoaded">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="dataSource && cart?.length;else notLoaded">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -32,7 +32,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     
-    <div class="total" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="dataSource && cart.length>0">
+    <div class="total" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="dataSource && cart?.length>0">
         <span class="m-1">Grand Total: 100</span>
         <span><button class="btn btn-success m-1">Make Order</button></span>
         <span><button class="btn btn-danger m-1">Clear Cart</button></span>
