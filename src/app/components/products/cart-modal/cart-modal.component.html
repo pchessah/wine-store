@@ -1,12 +1,12 @@
 <div class="card" fxLayout="column" fxLayoutAlign="center center">
   <div class="card-header">
-    {{singleProduct.productName}}
+    {{singleProduct?.productName}}
   </div>
   <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-    <img [src]="singleProduct.imgUrl" alt="product-image">
+    <img [src]="singleProduct?.imgUrl" alt="product-image">
     <strong>Description: </strong>
     <p>
-      {{singleProduct.description}}
+      {{singleProduct?.description}}
     </p>
   </div>
   <div class="card-footer" fxLayout="row" fxLayoutAlign="space-between center">

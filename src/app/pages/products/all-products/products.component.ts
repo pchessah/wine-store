@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IProducts } from 'src/app/libs/interfaces/iproducts';
 import { ProductsService } from 'src/app/libs/services/products.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CartModalComponent } from 'src/app/components/products/cart-modal/cart-modal.component';
@@ -14,7 +13,7 @@ import { ProductsModel } from 'src/app/libs/models/products-model';
 export class ProductsComponent implements OnInit {
 
   products: ProductsModel[];
-  singleProduct: ProductsModel = this._productsService.singleProduct;
+  singleProduct: ProductsModel;
   cart: ProductsModel[] = this._productsService.cart;
 
 
@@ -45,22 +44,18 @@ export class ProductsComponent implements OnInit {
     this._productsService.addToCart(id);
     this._productsService.currentCart.subscribe(cart => {
       this.cart = cart;
-
     })
 
     this._productsService.currentSingleProduct.subscribe(singleProduct => {
-      if(singleProduct != null){
-        this.singleProduct = singleProduct;
-        this.showSuccess(this.singleProduct.productName);
-        const dialogRef = this.dialog.open(CartModalComponent, {
-          width: "500px",
-          data: {
-            product: this.singleProduct,
-            cart: this.cart
-          }
-        })
-      }
- 
+      this._productsService.currentCart.subscribe(cart => {
+        this.cart = cart;
+      })
+      this.singleProduct = singleProduct;
+      this.showSuccess(this.singleProduct?.productName);
+      const dialogRef = this.dialog.open(CartModalComponent, {
+        width: "500px"
+      })
+
     })
 
   }

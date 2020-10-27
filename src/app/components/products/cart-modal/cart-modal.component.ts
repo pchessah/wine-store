@@ -21,13 +21,14 @@ export class CartModalComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data,
     private productService: ProductsService,
     private router: Router) {
-    this.singleProduct = this.data.product;
-    this.cart = this.data.cart;
+    // this.singleProduct = this.productService.singleProduct;
+    // this.cart = this.productService.cart;
     this.productService.calculateCart(this.cart, this.cartWithcounter);
   }
 
   ngOnInit(): void {
-   // this.productService.currentCart.subscribe(cart => this.cart = cart)
+   this.productService.currentCart.subscribe(cart => this.cart = cart);
+   this.productService.currentSingleProduct.subscribe(singleProduct=> this.singleProduct = singleProduct)
   }
 
   goToCart(): void {

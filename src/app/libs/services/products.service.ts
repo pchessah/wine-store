@@ -12,8 +12,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class ProductsService implements OnInit {
 
   products: ProductsModel[];
-  singleProduct: ProductsModel = null;
-  cart: ProductsModel[] = []
+  singleProduct: ProductsModel=undefined;
+  cart: ProductsModel[]=[]
   private singleProductSource = new BehaviorSubject<ProductsModel>(this.singleProduct)
   private cartSource = new BehaviorSubject<ProductsModel[]>(this.cart);
   currentCart = this.cartSource.asObservable();
@@ -76,8 +76,9 @@ export class ProductsService implements OnInit {
     this.getSingleProduct(id).subscribe((singleProduct: ProductsModel )=>{  
       this.singleProduct =  singleProduct;
       this.updateSingleProduct(this.singleProduct);
-      this.cart = [...this.cart, this.singleProduct];
-      this.updateCart(this.cart)      
+        this.cart = [...this.cart, this.singleProduct];
+        this.updateCart(this.cart) ;
+        debugger;    
     })  
     
     
