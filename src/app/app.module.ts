@@ -14,7 +14,6 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import { ProductsComponent } from './pages/products/all-products/products.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CartComponent } from './pages/cart/cart.component';
-import { CartModalComponent } from './components/products/cart-modal/cart-modal.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
@@ -44,7 +43,6 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     ProductsComponent,
     AboutUsComponent,
     CartComponent,
-    CartModalComponent,
     NewProductsComponent,
     DashboardComponent,
   ],

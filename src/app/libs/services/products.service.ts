@@ -5,6 +5,7 @@ import { catchError } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductsModel } from "../models/products-model";
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ProductsService implements OnInit {
   currentCart = this.cartSource.asObservable();
   currentSingleProduct = this.singleProductSource.asObservable();
 
-  constructor(private firestore: AngularFirestore, private fireStorage: AngularFireStorage) { }
+  constructor(private firestore: AngularFirestore, private fireStorage: AngularFireStorage, private toastr: ToastrService) { }
 
   ngOnInit(): void { }
 
@@ -80,7 +81,8 @@ export class ProductsService implements OnInit {
      
       if(this.singleProduct !== null || this.singleProduct !== undefined){
         this.singleProduct = singleProduct;       
-        this.updateSingleProduct(this.singleProduct);     
+        this.updateSingleProduct(this.singleProduct);
+        this.toastr.success(`${this.singleProduct.productName} added to cart`)    
         this.cart = [...this.cart, this.singleProduct];
         this.updateCart(this.cart);
       }
