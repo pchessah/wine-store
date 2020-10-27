@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { catchError } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductsModel } from "../models/products-model";
@@ -15,8 +15,9 @@ export class ProductsService implements OnInit {
   products: ProductsModel[];
   singleProduct: ProductsModel = undefined;
   cart: ProductsModel[] = []
-  private singleProductSource = new BehaviorSubject<ProductsModel>(null)
-  private cartSource = new BehaviorSubject<ProductsModel[]>([]);
+  private singleProductSource = new BehaviorSubject<ProductsModel>(null);
+  //cartBadge = new Subject<ProductsModel[]>();
+  cartSource = new BehaviorSubject<ProductsModel[]>([]);
   currentCart = this.cartSource.asObservable();
   currentSingleProduct = this.singleProductSource.asObservable();
 
@@ -82,7 +83,7 @@ export class ProductsService implements OnInit {
       if(this.singleProduct !== null || this.singleProduct !== undefined){
         this.singleProduct = singleProduct;       
         this.updateSingleProduct(this.singleProduct);
-        this.toastr.success(`${this.singleProduct.productName} added to cart`)    
+        this.toastr.success(`${this.singleProduct.productName} added to cart`);   
         this.cart = [...this.cart, this.singleProduct];
         this.updateCart(this.cart);
       }

@@ -38,6 +38,19 @@ export class ProductsComponent implements OnInit {
   //ADD ITEM TO CART, OPEN MODAL FOR THE ITEM
   addToCart(id): void {
     this._productsService.addToCart(id);
+
+    // this._productsService.currentCart.pipe(take(1)).subscribe(cart => {
+    //   if (cart.length > 0) {
+    //     this.cart = cart;
+    //   }
+    // });
+
+    // this._productsService.currentSingleProduct.pipe(take(1)).subscribe(singleProduct => {
+    //   if (singleProduct !== null && singleProduct !== undefined) {
+    //     this.singleProduct = singleProduct;
+    //     console.log(this.singleProduct);
+    //   }
+    // })
   }
 
 }

@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import {MatBadgeModule} from '@angular/material/badge';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -29,6 +30,8 @@ import { NewProductsComponent } from './admin/new-products/new-products.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireStorageModule} from '@angular/fire/storage';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { SingleProductComponent } from './pages/products/single-product/single-product.component';
+import { CartBadgeComponent } from './components/cart-badge/cart-badge.component';
 
 
 
@@ -45,6 +48,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     CartComponent,
     NewProductsComponent,
     DashboardComponent,
+    SingleProductComponent,
+    CartBadgeComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     MatCardModule,
     MatButtonModule,
     MatTableModule,
+    MatBadgeModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
