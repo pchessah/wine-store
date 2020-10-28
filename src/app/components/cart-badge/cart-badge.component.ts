@@ -20,6 +20,9 @@ export class CartBadgeComponent implements OnInit {
     this.cart = this._productsService.cart;
     this._productsService.cartSource.subscribe( cart =>{
       (this.num = cart.length);
+      if(cart.length>0){
+        this.hidden=false;
+      }
     })
    
   }

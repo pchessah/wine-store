@@ -6,10 +6,12 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/all-products/products.component';
+import { SingleProductComponent } from './pages/products/single-product/single-product.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent}, 
   {path: "products", component: ProductsComponent},
+  {path: "products/:id", component: SingleProductComponent},
   {path: "about-us", component: AboutUsComponent},
   {path: "cart", component: CartComponent},
   {path: "admin", component: DashboardComponent},
