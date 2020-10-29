@@ -5,7 +5,7 @@
     &#9776;
   </button>
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav navbar-nav ml-auto">
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="'/products'" (click)="isMenuCollapsed = true">Products</a>
       </li>
@@ -16,9 +16,11 @@
         <app-cart-badge></app-cart-badge>
       </li>
 
-      <li class="nav-item">
+      <!-- PUT GUARD TO ONLY SHOW IF ADMIN HAS LOGGED IN, ENABLE TO ADD PRODUCTS -->
+
+      <!-- <li class="nav-item">
         <a class="nav-link" [routerLink]="'/admin'" (click)="isMenuCollapsed = true">Admin</a>
-      </li>
+      </li> -->
 
     </ul>
   </div>
