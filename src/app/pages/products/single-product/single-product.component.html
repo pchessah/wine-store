@@ -1,10 +1,20 @@
-<div class="card">
-    <div class="card-header"> Product Name </div>
-    <div class="card-body">
-        <img src="" alt="single-product-img">
+<div class="card" fxLayout="column" fxLayoutAlign="center center">
+    <div class="card-header"> {{singleProduct?.productName}} </div>
+    <div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <img [src]="singleProduct?.imgUrl" alt="single-product-img">
+        </div>
+
+        <div class="description">
+            <p> {{singleProduct?.description}} </p>
+        </div>
         <div>
-            <p>Description</p>
+            <button class="btn btn-lg badge-success" (click)="addToCart(singleProduct.id)" fxLayout="row"
+                fxLayoutAlign="space-between center">
+                <i class="fas fa-cart-plus"></i>
+                <p>Add to cart </p>
+                <strong>Ksh. {{singleProduct?.price}} </strong>
+            </button>
         </div>
     </div>
-    
 </div>

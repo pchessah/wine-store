@@ -11,6 +11,7 @@ img{
 
 .card-body{
     padding: 0;
+    cursor: pointer;
 }
 
 span{
@@ -19,4 +20,14 @@ span{
 
 .card-header{
     background-color: #ADD8E6;
+    cursor: pointer;
+}
+
+.btn{
+    font-size: 10px;
+}
+
+i{
+    font-size: 8px;
+    padding-right: 6px;
 }
