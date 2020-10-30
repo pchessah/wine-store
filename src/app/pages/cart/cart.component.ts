@@ -13,7 +13,9 @@ export class CartComponent implements OnInit {
   cart: ProductsModel[];
   displayedColumns: string[] = ['productName', 'number', 'price', 'total'];
   dataSource;
-  random: any[]=[]
+  displayCart: any[]=[];
+  grandTotal: number;
+  grandTotalArray: any[]=[];
 
   constructor(private productsService: ProductsService) { }
 
@@ -21,7 +23,7 @@ export class CartComponent implements OnInit {
     this.productsService.currentCart.subscribe(cart => {
       this.cart = cart;
       this.calculateCart(this.cart)
-      this.dataSource = new MatTableDataSource(this.cart);
+      this.dataSource = new MatTableDataSource(this.displayCart);
     })
   }
 
@@ -32,13 +34,13 @@ export class CartComponent implements OnInit {
       var key = JSON.stringify(obj)
       counter[key] = (counter[key] || 0) + 1;
     })
-
     for (const [key, value] of Object.entries(counter)) {
-      this.random=[...this.random,[`${key}, ${value}`]]
+      let singleProduct = JSON.parse(key);     
+      this.displayCart=[...this.displayCart,[ singleProduct,+value]];
+      let total = singleProduct.price * (+value)
+      this.grandTotalArray = [...this.grandTotalArray,total];  
     }
-
-
-
+    this.grandTotal= this.grandTotalArray.reduce((a,b)=>a+b,0);
   }
 
 
