@@ -1,28 +1,24 @@
 <div class="p-5">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="dataSource && cart?.length;else notLoaded">
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-    
-        <!-- Product Name Column -->
+
         <ng-container matColumnDef="productName">
             <th mat-header-cell *matHeaderCellDef> Product Name </th>
             <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
         </ng-container>
     
-        <!-- Name Column -->
+  
         <ng-container matColumnDef="number">
             <th mat-header-cell *matHeaderCellDef> Number </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
     
-        <!-- Weight Column -->
         <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef> Price </th>
             <td mat-cell *matCellDef="let element"> {{element.price}} </td>
         </ng-container>
     
-        <!-- Symbol Column -->
+   
         <ng-container matColumnDef="total">
             <th mat-header-cell *matHeaderCellDef> Total </th>
             <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
@@ -37,6 +33,8 @@
         <span><button class="btn btn-success m-1">Make Order</button></span>
         <span><button class="btn btn-danger m-1">Clear Cart</button></span>
     </div>
+
+    <div *ngFor="let one of random">{{one}}</div>
     
     <ng-template #notLoaded>
         <div fxLayout="column" fxLayoutAlign="center center">

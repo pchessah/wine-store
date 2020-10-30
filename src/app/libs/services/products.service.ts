@@ -16,7 +16,6 @@ export class ProductsService implements OnInit {
   singleProduct: ProductsModel = undefined;
   cart: ProductsModel[] = []
   private singleProductSource = new BehaviorSubject<ProductsModel>(null);
-  //cartBadge = new Subject<ProductsModel[]>();
   cartSource = new BehaviorSubject<ProductsModel[]>([]);
   currentCart = this.cartSource.asObservable();
   currentSingleProduct = this.singleProductSource.asObservable();
@@ -25,25 +24,18 @@ export class ProductsService implements OnInit {
 
   ngOnInit(): void { }
 
+  //UPDATE CART AS OBSERVABLE
   updateCart(cart: ProductsModel[]) {
     this.cartSource.next(cart)
   }
 
+  //UPDATE SINGLE PRODUCT AS OBSERVABLE
   updateSingleProduct(singleProduct: ProductsModel) {
     this.singleProductSource.next(singleProduct)
   }
 
-  calculateCart(cart: ProductsModel[], counter) {
-    cart.forEach(function (obj) {
-      let key = JSON.stringify(obj);
-      counter[key] = (counter[key] || 0) + 1;
-      return counter
-    })
-    this.cart = [...cart],
-      this.updateCart(this.cart)
-  }
 
-
+ //CHECK ERRORS WITH HTTP CALLS
   handleError(err: HttpErrorResponse) {
     let errorMessage = "";
     //check if error is on the client side
@@ -57,6 +49,8 @@ export class ProductsService implements OnInit {
     return throwError(errorMessage);
   }
 
+  
+  //GET ALL PRODUCTS
   getAllProducts() {
     return this.firestore.collection("products").snapshotChanges().pipe(
       catchError(this.handleError)
@@ -78,8 +72,7 @@ export class ProductsService implements OnInit {
 
   //ADD ITEM TO CART
   addToCart(id) {
-    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel) => {
-     
+    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel) => {     
       if(this.singleProduct !== null || this.singleProduct !== undefined){
         this.singleProduct = singleProduct;       
         this.updateSingleProduct(this.singleProduct);
@@ -95,10 +88,5 @@ export class ProductsService implements OnInit {
     const file = event.target.files[0];
     const task = this.fireStorage.upload(`productImages/${n}`, file);
     return task.snapshotChanges()
-
   }
-
-
-
-
 }
