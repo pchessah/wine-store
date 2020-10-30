@@ -54,7 +54,7 @@ import { CartBadgeComponent } from './components/cart-badge/cart-badge.component
   imports: [
     BrowserModule,
     BrowserAnimationsModule, 
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot( { closeButton: true}),
     NgbCollapseModule,
     FlexLayoutModule,
     MatDialogModule,

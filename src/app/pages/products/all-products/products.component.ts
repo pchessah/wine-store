@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  //ADD ITEM TO CART
+  //ADD ITEM TO CART, OPEN MODAL FOR THE ITEM
   addToCart(id): void {
     this._productsService.addToCart(id);
   }

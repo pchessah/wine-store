@@ -43,6 +43,16 @@ export class CartComponent implements OnInit {
     this.grandTotal= this.grandTotalArray.reduce((a,b)=>a+b,0);
   }
 
+  clearCart(){
+    this.productsService.clearCart();
+  }
+
+  removeOneItem(id){
+    // let a = this.cart.filter(cartItem=> cartItem.productId !== id )
+    // this.calculateCart(a)
+    // this.dataSource = new MatTableDataSource(this.displayCart);
+  }
+
 
 
 

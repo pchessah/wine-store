@@ -9,7 +9,29 @@ table {
 .total-value{
     border: 0.1px solid grey;
     border-radius: 5px;
-    padding: 15px;
+   width: 200px;
     font-size: larger;
-    background-color: #ADD8E6;
+    background-color: #EBA154;
+    color: white;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+button{
+    width: 200px;
+}
+
+.action-btn{
+    width: 30px !important;
+    text-align: center !important;
+}
+
+th, td{
+    padding: 1px 4px !important;
+    text-align: center;
+}
+
+th.mat-header-cell{
+    text-align: center !important;
+    font-weight: 600;
 }

@@ -24,6 +24,8 @@ export class ProductsService implements OnInit {
 
   ngOnInit(): void { }
 
+  
+
   //UPDATE CART AS OBSERVABLE
   updateCart(cart: ProductsModel[]) {
     this.cartSource.next(cart)
@@ -81,6 +83,20 @@ export class ProductsService implements OnInit {
         this.updateCart(this.cart);
       }
     })
+  }
+
+
+  
+  //CLEAR CART
+  clearCart(){
+    this.cart = [];
+    this.updateCart(this.cart);
+  }
+
+  //REMOVE ONE ITEM
+  removeOneItem(id){
+    console.log(id);
+ 
   }
 
   //UPLOAD FUNCTION
