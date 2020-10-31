@@ -85,6 +85,9 @@ export class ProductsService implements OnInit {
     })
   }
 
+  //service to be improved
+  
+
 
   
   //CLEAR CART

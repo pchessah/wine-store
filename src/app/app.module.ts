@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
- 
+
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,19 +16,19 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CartComponent } from './pages/cart/cart.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule,  } from '@angular/fire';
+import { AngularFireModule, } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NewProductsComponent } from './admin/new-products/new-products.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireStorageModule} from '@angular/fire/storage';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SingleProductComponent } from './pages/products/single-product/single-product.component';
 import { CartBadgeComponent } from './components/cart-badge/cart-badge.component';
@@ -53,8 +53,8 @@ import { CartBadgeComponent } from './components/cart-badge/cart-badge.component
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, 
-    ToastrModule.forRoot( { closeButton: true}),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ closeButton: true }),
     NgbCollapseModule,
     FlexLayoutModule,
     MatDialogModule,
