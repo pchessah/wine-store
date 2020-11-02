@@ -27,21 +27,37 @@ export class ProductsService implements OnInit {
 
 
   //ADD ITEM BASED ON PRODUCT ID QUERY
-  async addOneItemToCart(id: string){
+  async addOneItemToCart(id: string) {
     const query = await this.firestore.firestore.collection("products").where("productId", "==", id).get();
     if (!query.empty) {
       const snapshot = query.docs[0];
       const data = snapshot.data();
       this.singleProductFromQuery = data;
-      this.cart = [...this.cart,this.singleProductFromQuery];
-      this.updateCart(this.cart)     
+      this.toastr.success(`One more ${this.singleProductFromQuery.productName} added to cart.`)
+      this.cart = [...this.cart, this.singleProductFromQuery];
+      this.updateCart(this.cart)
     } else {
       console.error("not worked");
     }
   }
 
+  //REMOVE ITEM BASED ON PRODUCT ID QUERY
+  async removeOneItemFromCart(id: string) {
+    const query = await this.firestore.firestore.collection("products").where("productId", "==", id).get();
+    if (!query.empty) {
+      const snapshot = query.docs[0];
+      const data = snapshot.data();
+      this.singleProductFromQuery = data;
+      this.toastr.warning(`One ${this.singleProductFromQuery.productName} removed from cart.`);
+      let index = this.cart.findIndex(item => item.productId == this.singleProductFromQuery.productId);
+      let newCart = this.cart.splice(index,1);
+      console.log(newCart);
+      this.updateCart(newCart)
+    } else {
+      console.error("not worked");
+    }
+  }
 
-  
 
   //UPDATE CART AS OBSERVABLE
   updateCart(cart: ProductsModel[]) {
@@ -54,7 +70,7 @@ export class ProductsService implements OnInit {
   }
 
 
- //CHECK ERRORS WITH HTTP CALLS
+  //CHECK ERRORS WITH HTTP CALLS
   handleError(err: HttpErrorResponse) {
     let errorMessage = "";
     //check if error is on the client side
@@ -68,14 +84,14 @@ export class ProductsService implements OnInit {
     return throwError(errorMessage);
   }
 
-  
+
   //GET ALL PRODUCTS
   getAllProducts() {
     return this.firestore.collection("products").snapshotChanges().pipe(
       catchError(this.handleError)
     );
   }
-  
+
 
   //GET SINGLE ITEM VIA ID
   getSingleProduct(id: string) {
@@ -91,27 +107,23 @@ export class ProductsService implements OnInit {
 
   //ADD ITEM TO CART
   addToCart(id) {
-    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel) => {     
-      if(this.singleProduct !== null || this.singleProduct !== undefined){
-        this.singleProduct = singleProduct;       
+    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel) => {
+      if (this.singleProduct !== null || this.singleProduct !== undefined) {
+        this.singleProduct = singleProduct;
         this.updateSingleProduct(this.singleProduct);
-        this.toastr.success(`${this.singleProduct.productName} added to cart`);   
+        this.toastr.success(`${this.singleProduct.productName} added to cart`);
         this.cart = [...this.cart, this.singleProduct];
         this.updateCart(this.cart);
       }
     })
   }
 
-  
+
   //CLEAR CART
-  clearCart(){
+  clearCart() {
     this.cart = [];
     this.updateCart(this.cart);
-  }
-
-  //REMOVE ONE ITEM
-  removeOneItem(id){
-    console.log(id); 
+    this.toastr.error("Cart has been cleared")
   }
 
   //UPLOAD FUNCTION
