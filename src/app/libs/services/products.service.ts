@@ -26,6 +26,29 @@ export class ProductsService implements OnInit {
   ngOnInit(): void { }
 
 
+  
+  //ADD ITEM TO CART
+  addToCart(id) {
+    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel) => {
+      if (this.singleProduct !== null || this.singleProduct !== undefined) {
+        this.singleProduct = singleProduct;
+        this.updateSingleProduct(this.singleProduct);
+        this.toastr.success(`${this.singleProduct.productName} added to cart`);
+        this.cart = [...this.cart, this.singleProduct];
+        this.updateCart(this.cart);
+      }
+    })
+  }
+
+
+  //CLEAR CART
+  clearCart() {
+    this.cart = [];
+    this.updateCart(this.cart);
+    this.toastr.error("Cart has been cleared")
+  }
+
+
   //ADD ITEM BASED ON PRODUCT ID QUERY
   async addOneItemToCart(id: string) {
     const query = await this.firestore.firestore.collection("products").where("productId", "==", id).get();
@@ -37,7 +60,7 @@ export class ProductsService implements OnInit {
       this.cart = [...this.cart, this.singleProductFromQuery];
       this.updateCart(this.cart)
     } else {
-      console.error("not worked");
+      console.error("No item added");
     }
   }
 
@@ -50,11 +73,10 @@ export class ProductsService implements OnInit {
       this.singleProductFromQuery = data;
       this.toastr.warning(`One ${this.singleProductFromQuery.productName} removed from cart.`);
       let index = this.cart.findIndex(item => item.productId == this.singleProductFromQuery.productId);
-      let newCart = this.cart.splice(index,1);
-      console.log(newCart);
-      this.updateCart(newCart)
+      this.cart.splice(index,1);     
+      this.updateCart(this.cart)
     } else {
-      console.error("not worked");
+      console.error("No item removed");
     }
   }
 
@@ -105,26 +127,6 @@ export class ProductsService implements OnInit {
     return this.firestore.collection("products").add(product)
   }
 
-  //ADD ITEM TO CART
-  addToCart(id) {
-    this.getSingleProduct(id).subscribe((singleProduct: ProductsModel) => {
-      if (this.singleProduct !== null || this.singleProduct !== undefined) {
-        this.singleProduct = singleProduct;
-        this.updateSingleProduct(this.singleProduct);
-        this.toastr.success(`${this.singleProduct.productName} added to cart`);
-        this.cart = [...this.cart, this.singleProduct];
-        this.updateCart(this.cart);
-      }
-    })
-  }
-
-
-  //CLEAR CART
-  clearCart() {
-    this.cart = [];
-    this.updateCart(this.cart);
-    this.toastr.error("Cart has been cleared")
-  }
 
   //UPLOAD FUNCTION
   uploadSingleFile(event, n) {
