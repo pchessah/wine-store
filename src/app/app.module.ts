@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
+import {MatListModule} from '@angular/material/list';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,6 +33,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SingleProductComponent } from './pages/products/single-product/single-product.component';
 import { CartBadgeComponent } from './components/cart-badge/cart-badge.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 
 
@@ -50,6 +52,7 @@ import { CartBadgeComponent } from './components/cart-badge/cart-badge.component
     DashboardComponent,
     SingleProductComponent,
     CartBadgeComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { CartBadgeComponent } from './components/cart-badge/cart-badge.component
     NgbCollapseModule,
     FlexLayoutModule,
     MatDialogModule,
+    MatListModule, 
     MatCardModule,
     MatButtonModule,
     MatTableModule,

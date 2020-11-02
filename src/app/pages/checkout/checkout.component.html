@@ -1,0 +1,17 @@
+<div fxLayout="column" fxLayoutAlign="center">
+    <h4 class="text-center">Your Cart</h4>
+    <mat-card >
+        <mat-list>
+            <mat-list-item *ngFor="let cartItem of cart">
+              <img matListAvatar [src]="cartItem.imgUrl" alt="...">
+              <h3 matLine> {{cartItem.productName}} </h3>
+              <p matLine>
+                <span> {{cartItem.price}} </span>
+                <span class="demo-2"> {{cartItem.price}} </span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+       
+    </mat-card>
+</div>
+

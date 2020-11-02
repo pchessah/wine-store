@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ProductsModel } from 'src/app/libs/models/products-model';
 import { ProductsService } from 'src/app/libs/services/products.service';
 
@@ -19,9 +20,9 @@ export class CartComponent implements OnInit {
 
 
 
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService, private router: Router) { }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
     this.productsService.currentCart.subscribe(cart => {
       this.cart = cart;
       this.calculateCart(this.cart)
@@ -51,25 +52,22 @@ export class CartComponent implements OnInit {
 
   removeOneItem(id): void {
     this.productsService.removeOneItemFromCart(id);
-    this.displayCart=[];
-    this.grandTotalArray=[];
+    this.displayCart = [];
+    this.grandTotalArray = [];
   }
 
   addOneItem(id): void {
     this.productsService.addOneItemToCart(id);
-    this.displayCart =[];
-    this.grandTotalArray =[];
+    this.displayCart = [];
+    this.grandTotalArray = [];
   }
 
-  checkout(): void{
-   
+  checkout(): void {
+    if (confirm("Confirm to proceed to checkout")) {
+      this.router.navigateByUrl("/checkout")
+    } else {
+      this.router.navigateByUrl("/cart")
+    }
   }
-
-
-
-
-
-
-
 
 }
