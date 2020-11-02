@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/libs/services/products.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductsModel } from 'src/app/libs/models/products-model';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',

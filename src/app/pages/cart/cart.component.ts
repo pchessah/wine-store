@@ -13,13 +13,16 @@ export class CartComponent implements OnInit {
   cart: ProductsModel[];
   displayedColumns: string[] = ['productName', 'number', 'price', 'total'];
   dataSource;
-  displayCart: any[]=[];
+  displayCart: any[] = [];
   grandTotal: number;
-  grandTotalArray: any[]=[];
+  grandTotalArray: any[] = [];
+
+
 
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
+   
     this.productsService.currentCart.subscribe(cart => {
       this.cart = cart;
       this.calculateCart(this.cart)
@@ -35,23 +38,26 @@ export class CartComponent implements OnInit {
       counter[key] = (counter[key] || 0) + 1;
     })
     for (const [key, value] of Object.entries(counter)) {
-      let singleProduct = JSON.parse(key);     
-      this.displayCart=[...this.displayCart,[ singleProduct,+value]];
+      let singleProduct = JSON.parse(key);
+      this.displayCart = [...this.displayCart, [singleProduct, +value]];
       let total = singleProduct.price * (+value)
-      this.grandTotalArray = [...this.grandTotalArray,total];  
+      this.grandTotalArray = [...this.grandTotalArray, total];
     }
-    this.grandTotal= this.grandTotalArray.reduce((a,b)=>a+b,0);
+    this.grandTotal = this.grandTotalArray.reduce((a, b) => a + b, 0);
   }
 
-  clearCart(){
+  clearCart() {
     this.productsService.clearCart();
   }
 
-  removeOneItem(id){
-    // let a = this.cart.filter(cartItem=> cartItem.productId !== id )
-    // this.calculateCart(a)
-    // this.dataSource = new MatTableDataSource(this.displayCart);
+  removeOneItem(id): void {
   }
+
+  addOneItem(id): void {
+    this.productsService.addOneItemToCart(id);
+  }
+
+
 
 
 

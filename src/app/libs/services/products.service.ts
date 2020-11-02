@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductsService implements OnInit {
 
+  singleProductFromQuery: any
   products: ProductsModel[];
   singleProduct: ProductsModel = undefined;
   cart: ProductsModel[] = []
@@ -23,6 +24,22 @@ export class ProductsService implements OnInit {
   constructor(private firestore: AngularFirestore, private fireStorage: AngularFireStorage, private toastr: ToastrService) { }
 
   ngOnInit(): void { }
+
+
+  //ADD ITEM BASED ON PRODUCT ID QUERY
+  async addOneItemToCart(id: string){
+    const query = await this.firestore.firestore.collection("products").where("productId", "==", id).get();
+    if (!query.empty) {
+      const snapshot = query.docs[0];
+      const data = snapshot.data();
+      this.singleProductFromQuery = data;
+      this.cart = [...this.cart,this.singleProductFromQuery];
+      this.updateCart(this.cart)     
+    } else {
+      console.error("not worked");
+    }
+  }
+
 
   
 
@@ -85,15 +102,6 @@ export class ProductsService implements OnInit {
     })
   }
 
-  //service to be improved
-  //que sera bonita
-  
-
-  //win dough window
-
-
-
-
   
   //CLEAR CART
   clearCart(){
@@ -103,8 +111,7 @@ export class ProductsService implements OnInit {
 
   //REMOVE ONE ITEM
   removeOneItem(id){
-    console.log(id);
- 
+    console.log(id); 
   }
 
   //UPLOAD FUNCTION
