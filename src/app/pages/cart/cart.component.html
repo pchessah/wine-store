@@ -26,7 +26,7 @@
         </ng-container> -->
 
         <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <th mat-header-cell *matHeaderCellDef> Price Per Unit </th>
             <td mat-cell *matCellDef="let element"> {{element[0].price}} </td>
         </ng-container>
 
@@ -41,8 +41,8 @@
     </table>
 
     <div class="total" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="dataSource && cart?.length>0">
-        <span class="m-1 total-value">Total: Ksh {{grandTotal}}</span>
-        <span><button class="btn btn-success m-1">Make Order</button></span>
+        <span class="m-1 total-value text-center">Total: Ksh {{grandTotal}}</span>
+        <span><button class="btn btn-success m-1"(click)="checkout()">Proceed to checkout</button></span>
         <span><button class="btn btn-danger m-1" (click)="clearCart()">Clear Cart</button></span>
     </div>
 

@@ -61,6 +61,10 @@ export class CartComponent implements OnInit {
     this.grandTotalArray =[];
   }
 
+  checkout(): void{
+   
+  }
+
 
 
 
