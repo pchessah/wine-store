@@ -13,7 +13,7 @@
     <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
         
         <div fxLayout="column">
-            <label for="firstName">Your Email</label>
+            <label for="email">Your Email</label>
             <input formControlName="email" type="email">
         </div>
        
@@ -24,18 +24,15 @@
        
     </div>
     <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
-        <span class="btn-info btn m-2">
-            Order No.: 1234
-        </span>
         <span class="btn btn-warning m-2">
-            Total.:Ksh. 4590
+            Total:Ksh. {{data.total}}
         </span>
     </div>
     <div class="text-center" fxLayout="column"fxLayoutAlign="center center">
-        <button class="btn btn-success m-2" type="submit" [disabled]="!checkoutForm.form.valid" >
+        <button (click)="submitOrder()" class="btn btn-success m-2" type="submit" [disabled]="!checkoutForm.valid" >
             Submit Order
         </button>
-        <button class="btn btn-danger m-2">
+        <button (click)="cancelOrder()" class="btn btn-outline-danger m-2">
             Cancel order
         </button>
     </div>

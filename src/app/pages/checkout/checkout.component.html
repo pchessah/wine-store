@@ -21,14 +21,14 @@
         <div class="text-center" fxLayout="row wrap" fxLayoutAlign="center center">
             <button class="btn btn-outline-info m-1" (click)="editOrder()">Edit Order</button>
             <button class="btn btn-success m-1" (click)="submitOrder()">Submit Order</button>
-            <button class="btn btn-danger m-1" (click)="cancelOrder()">Cancel Order</button>
+            <button class="btn btn-outline-danger m-1" (click)="cancelOrder()">Cancel Order</button>
         </div>        
     </mat-card>
 </div>
 
 <ng-template #notLoaded>
     <div fxLayout="column" fxLayoutAlign="center center">
-        <h1 class="text-center"> Nothing to checkout </h1>
+        <h5 class="text-center"> Nothing to checkout </h5>
         <a class="btn btn-primary" [routerLink]="['/products']" routerLinkActive="router-link-active">Go to products
             page</a>
     </div>

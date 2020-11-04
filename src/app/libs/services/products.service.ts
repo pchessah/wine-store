@@ -21,7 +21,9 @@ export class ProductsService implements OnInit {
   currentCart = this.cartSource.asObservable();
   currentSingleProduct = this.singleProductSource.asObservable();
 
-  constructor(private firestore: AngularFirestore, private fireStorage: AngularFireStorage, private toastr: ToastrService) { }
+  constructor(private firestore: AngularFirestore,
+              private fireStorage: AngularFireStorage,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void { }
 
@@ -46,6 +48,12 @@ export class ProductsService implements OnInit {
     this.cart = [];
     this.updateCart(this.cart);
     this.toastr.error("Cart has been cleared")
+  }
+
+  //CLEAR CART AFTER SUBMIT
+  submitCart(){
+    this.cart = [];
+    this.updateCart(this.cart)
   }
 
 
