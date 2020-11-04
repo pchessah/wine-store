@@ -3,23 +3,23 @@
     <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
         <div fxLayout="column">
             <label for="firstName">First Name</label>
-            <input formControlName="firstName" type="text">
+            <input required formControlName="firstName" type="text">
         </div>
         <div fxLayout="column">
             <label for="lastName">Last Name</label>
-            <input formControlName="lastName" type="text">
+            <input required formControlName="lastName" type="text">
         </div>       
     </div>
     <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
         
         <div fxLayout="column">
             <label for="email">Your Email</label>
-            <input formControlName="email" type="email">
+            <input required formControlName="email" type="email">
         </div>
        
         <div fxLayout="column">
             <label for="phoneNumber">Your Phone No</label>
-            <input formControlName="phoneNumber" type="number">
+            <input required formControlName="phoneNumber" type="number">
         </div>
        
     </div>
@@ -29,8 +29,8 @@
         </span>
     </div>
     <div class="text-center" fxLayout="column"fxLayoutAlign="center center">
-        <button (click)="submitOrder()" class="btn btn-success m-2" type="submit" [disabled]="!checkoutForm.valid" >
-            Submit Order
+        <button (click)="submitOrder()" class="btn btn-success m-2" type="submit" [disabled]="!checkoutForm.form.valid" >
+            Complete Order
         </button>
         <button (click)="cancelOrder()" class="btn btn-outline-danger m-2">
             Cancel order

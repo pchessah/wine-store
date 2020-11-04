@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IOrders } from 'src/app/libs/interfaces/iorders';
-import { OrdersModel } from 'src/app/libs/models/orders-model';
 import { ProductsModel } from 'src/app/libs/models/products-model';
 import { OrdersService } from 'src/app/libs/services/orders.service';
 import { ProductsService } from 'src/app/libs/services/products.service';
@@ -26,7 +25,8 @@ export class CheckoutModalComponent implements OnInit {
                    lastName:undefined,
                    orderNo: undefined,
                    products: this.products,
-                   phoneNumber: undefined};
+                   phoneNumber: undefined,
+                  grandTotal: undefined};
 
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<CheckoutModalComponent>,
@@ -60,7 +60,8 @@ export class CheckoutModalComponent implements OnInit {
         this.router.navigateByUrl("/home");        
       }
     }
-
+    
+    //SUBMIT ORDER
     submitOrder():void{
       this.order.email = this.checkoutForm.value.email;
       this.order.firstName = this.checkoutForm.value.firstName;
@@ -68,8 +69,11 @@ export class CheckoutModalComponent implements OnInit {
       this.order.orderNo = this.tempOrderNo;
       this.order.phoneNumber = this.checkoutForm.value.phoneNumber;
       this.order.products = this.products;
+      this.order.grandTotal = this.data.total;
       this.toastr.success(`Order number: ${this.order.orderNo} submitted.`)
       this.orderService.submitOrder(this.order); 
+      this.dialogRef.close();
+      this.router.navigateByUrl("/home");
     }
   
 

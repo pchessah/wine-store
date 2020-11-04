@@ -59,7 +59,7 @@ export class CheckoutComponent implements OnInit {
   submitOrder(): void {
     const dialogRef =  this.dialog.open(CheckoutModalComponent, {
       width: '550px',
-      data: {products: this.cart, total: this.grandTotal}
+      data: {products: this.cart, total: this.grandTotal, cartWithNumber: this.displayCart}
     })
 
     dialogRef.afterClosed().subscribe(result => {
