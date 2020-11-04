@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CheckoutModalComponent } from 'src/app/components/checkout-modal/checkout-modal.component';
 import { ProductsModel } from 'src/app/libs/models/products-model';
 import { ProductsService } from 'src/app/libs/services/products.service';
 
@@ -15,10 +17,12 @@ export class CheckoutComponent implements OnInit {
   grandTotal: number;
   grandTotalArray: any[] = [];
 
-  constructor( private productsService: ProductsService, private router: Router) { }
+  constructor(private productsService: ProductsService,
+              private router: Router,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.productsService.cartSource.subscribe(cart=>{
+    this.productsService.cartSource.subscribe(cart => {
       this.cart = cart;
       this.calculateCart(this.cart);
     })
@@ -39,12 +43,12 @@ export class CheckoutComponent implements OnInit {
     this.grandTotal = this.grandTotalArray.reduce((a, b) => a + b, 0);
   }
 
-  editOrder(): void{
+  editOrder(): void {
     this.router.navigateByUrl("/cart")
   }
 
-  cancelOrder(): void{
-    if(confirm("Are you sure you want to cancel the order?")){
+  cancelOrder(): void {
+    if (confirm("Are you sure you want to cancel the order?")) {
       this.productsService.clearCart();
       this.router.navigateByUrl("/home");
     } else {
@@ -52,8 +56,15 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  submitOrder():void{
-    console.log("submit order");
+  submitOrder(): void {
+    const dialogRef =  this.dialog.open(CheckoutModalComponent, {
+      width: '550px',
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
   }
 
 }

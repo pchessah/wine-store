@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -34,6 +35,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SingleProductComponent } from './pages/products/single-product/single-product.component';
 import { CartBadgeComponent } from './components/cart-badge/cart-badge.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { CheckoutModalComponent } from './components/checkout-modal/checkout-modal.component';
 
 
 
@@ -53,6 +55,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     SingleProductComponent,
     CartBadgeComponent,
     CheckoutComponent,
+    CheckoutModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,8 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     MatCardModule,
     MatButtonModule,
     MatTableModule,
+    
+    MatFormFieldModule,    
     MatBadgeModule,
     AppRoutingModule,
     HttpClientModule,

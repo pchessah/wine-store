@@ -1,0 +1,42 @@
+<form [formGroup]="checkoutForm" fxLayout="column">
+    <div fxLayout="row"fxLayoutAlign="space-evenly center">
+        <div fxLayout="column">
+            <label for="firstName">First Name</label>
+            <input formControlName="firstName" type="text">
+        </div>
+        <div fxLayout="column">
+            <label for="lastName">Last Name</label>
+            <input formControlName="lastName" type="text">
+        </div>       
+    </div>
+    <div fxLayout="row"fxLayoutAlign="space-evenly center">
+        
+        <div fxLayout="column">
+            <label for="firstName">Your Email</label>
+            <input formControlName="email" type="email">
+        </div>
+       
+        <div fxLayout="column">
+            <label for="phoneNumber">Your Phone No</label>
+            <input formControlName="phoneNumber" type="number">
+        </div>
+       
+    </div>
+    <div fxLayout="row"fxLayoutAlign="space-evenly center">
+        <span class="btn-info btn m-2">
+            Order No.: 1234
+        </span>
+        <span class="btn btn-warning m-2">
+            Total.:Ksh. 4590
+        </span>
+    </div>
+    <div class="text-center" fxLayout="column"fxLayoutAlign="center center">
+        <button class="btn btn-success m-2" type="submit" [disabled]="!checkoutForm.form.valid" >
+            Submit Order
+        </button>
+        <button class="btn btn-danger m-2">
+            Cancel order
+        </button>
+    </div>
+
+</form>
