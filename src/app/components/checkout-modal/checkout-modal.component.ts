@@ -14,7 +14,7 @@ export class CheckoutModalComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.checkoutForm = this.fb.group({
       firstName:[""],
-      secondName:[""],
+      lastName:[""],
       email:[""],
       phoneNumber:[""],
       orderNo:[""]

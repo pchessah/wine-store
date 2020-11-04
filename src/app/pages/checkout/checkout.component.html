@@ -1,4 +1,4 @@
-<div *ngIf="cart && cart?.length;else notLoaded" class="m-5 p-5">
+<div *ngIf="cart && cart?.length;else notLoaded" class="p-5">
     <h4 class="text-center">Your Cart</h4>
     <mat-card>
 
@@ -14,14 +14,14 @@
             </mat-list-item>
         </mat-list>
 
-        <div fxLayout="row" fxLayoutAlign="center center">
+        <div class="m-3" fxLayout="row" fxLayoutAlign="center center">
             <div class="btn btn-warning text-center font-weight-bolder">Grand Total: {{grandTotal}}</div>
         </div>
         
-        <div class="text-center" fxLayout="row" fxLayoutAlign="center center">
-            <button class="btn btn-outline-info m-3" (click)="editOrder()">Edit Order</button>
-            <button class="btn btn-success m-3" (click)="submitOrder()">Submit Order</button>
-            <button class="btn btn-danger m-3" (click)="cancelOrder()">Cancel Order</button>
+        <div class="text-center" fxLayout="row wrap" fxLayoutAlign="center center">
+            <button class="btn btn-outline-info m-1" (click)="editOrder()">Edit Order</button>
+            <button class="btn btn-success m-1" (click)="submitOrder()">Submit Order</button>
+            <button class="btn btn-danger m-1" (click)="cancelOrder()">Cancel Order</button>
         </div>        
     </mat-card>
 </div>

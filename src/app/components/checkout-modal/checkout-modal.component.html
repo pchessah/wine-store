@@ -1,5 +1,6 @@
 <form [formGroup]="checkoutForm" fxLayout="column">
-    <div fxLayout="row"fxLayoutAlign="space-evenly center">
+    <h5 class="text-center">Check Out</h5>
+    <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
         <div fxLayout="column">
             <label for="firstName">First Name</label>
             <input formControlName="firstName" type="text">
@@ -9,7 +10,7 @@
             <input formControlName="lastName" type="text">
         </div>       
     </div>
-    <div fxLayout="row"fxLayoutAlign="space-evenly center">
+    <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
         
         <div fxLayout="column">
             <label for="firstName">Your Email</label>
@@ -22,7 +23,7 @@
         </div>
        
     </div>
-    <div fxLayout="row"fxLayoutAlign="space-evenly center">
+    <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
         <span class="btn-info btn m-2">
             Order No.: 1234
         </span>
