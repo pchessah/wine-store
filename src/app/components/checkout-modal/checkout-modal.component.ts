@@ -9,6 +9,9 @@ import { OrdersService } from 'src/app/libs/services/orders.service';
 import { ProductsService } from 'src/app/libs/services/products.service';
 import { v4 as uniqueId } from "uuid";
 import { Email } from "../../../assets/smtp";
+import{ init } from 'emailjs-com';
+import emailjs from 'emailjs-com';
+init("user_s3GXm5gpAGyKt7rNl9Qfb");
 
 @Component({
   selector: 'app-checkout-modal',
@@ -18,11 +21,11 @@ import { Email } from "../../../assets/smtp";
 export class CheckoutModalComponent implements OnInit {
 
   checkoutForm = this.fb.group({
-    firstName: ["", Validators.required],
-    lastName: ["", Validators.required],
-    email: ["",Validators.required, Validators.email],
-    phoneNumber: ["", Validators.required],
-    orderNo: ["", Validators.required]
+    firstName: ["", [Validators.required]],
+    lastName: ["", [Validators.required]],
+    email: ["",[Validators.required]],
+    phoneNumber: ["", [Validators.required]],
+    orderNo: [""]
   })
   products: ProductsModel[] = undefined;
   tempOrderNo: string;
@@ -62,6 +65,7 @@ export class CheckoutModalComponent implements OnInit {
   cancelOrder(): void {
     if (confirm("Are you sure you want to cancel this order?")) {
       this.productService.clearCart();
+      this.dialogRef.close();
       this.router.navigateByUrl("/home");
     }
   }
@@ -75,23 +79,28 @@ export class CheckoutModalComponent implements OnInit {
     this.order.phoneNumber = this.checkoutForm.value.phoneNumber;
     this.order.products = this.products;
     this.order.grandTotal = this.data.total;
-    this.toastr.success(`Order number: ${this.order.orderNo} submitted.`)
+
     this.orderService.submitOrder(this.order);
+    this.toastr.success(`Order number: ${this.order.orderNo} submitted. An email has been sent to ${this.order.email}`)
+    this.emailToCustomer();
     this.dialogRef.close();
     this.router.navigateByUrl("/home");
   }
 
   //EMAIL TO CUSTOMER
   emailToCustomer(): void {
-    Email.send({
-      Host: "smtp.elasticemail.com",
-      Username: "paulchesa1@gmail.com",
-      Password: "E705258C9626F2222131A696BE431A34BAFC",
-      To: this.order.email,
-      From: 'paulchesa1@gmail.com',
-      Subject: `Order No. ${this.order.orderNo}`,
-      Body: `Your Order  ${this.order.orderNo} has been confirmed`
-    })
+    const templateParams = {
+      to_email: this.order.email,
+      from_name: 'Asconi Wines',
+      message: `Your order ${this.order.orderNo} has been received and is being processed.`
+  };
+   
+  emailjs.send('service_csyz6nw','template_j0w73t8', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
+      .then((response) => {
+         console.log('SUCCESS!', response.status, response.text);
+      }, (err) => {
+         console.log('FAILED...', err);
+      });
   }
 
 
