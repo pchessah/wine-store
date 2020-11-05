@@ -8,7 +8,6 @@ import { ProductsModel } from 'src/app/libs/models/products-model';
 import { OrdersService } from 'src/app/libs/services/orders.service';
 import { ProductsService } from 'src/app/libs/services/products.service';
 import { v4 as uniqueId } from "uuid";
-import { Email } from "../../../assets/smtp";
 import{ init } from 'emailjs-com';
 import emailjs from 'emailjs-com';
 init("user_s3GXm5gpAGyKt7rNl9Qfb");
@@ -83,6 +82,7 @@ export class CheckoutModalComponent implements OnInit {
     this.orderService.submitOrder(this.order);
     this.toastr.success(`Order number: ${this.order.orderNo} submitted. An email has been sent to ${this.order.email}`)
     this.emailToCustomer();
+    this.emailToAdmin();
     this.dialogRef.close();
     this.router.navigateByUrl("/home");
   }
@@ -92,7 +92,8 @@ export class CheckoutModalComponent implements OnInit {
     const templateParams = {
       to_email: this.order.email,
       from_name: 'Asconi Wines',
-      message: `Your order ${this.order.orderNo} has been received and is being processed.`
+      message: `Your order ${this.order.orderNo} has been received and is being processed.`,
+      order_no: this.order.orderNo
   };
    
   emailjs.send('service_csyz6nw','template_j0w73t8', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
@@ -101,6 +102,30 @@ export class CheckoutModalComponent implements OnInit {
       }, (err) => {
          console.log('FAILED...', err);
       });
+  }
+
+
+  //EMAIL TO ADMIN
+  emailToAdmin():void{
+    const templateParams = {
+      customer_email: this.order.email,
+      customer_phone_no: this.order.phoneNumber,
+      message: this.order.products.filter(item=>{
+        return item.productName;
+      }),
+      grand_Total: this.order.grandTotal,
+      order_no: this.order.orderNo,
+      firstName: this.order.firstName,
+      lastName: this.order.lastName
+  };
+   
+  emailjs.send('service_csyz6nw','template_8gkys9i', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
+      .then((response) => {
+         console.log('SUCCESS!', response.status, response.text);
+      }, (err) => {
+         console.log('FAILED...', err);
+      });
+
   }
 
 
