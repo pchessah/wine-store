@@ -18,11 +18,11 @@ import { Email } from "../../../assets/smtp";
 export class CheckoutModalComponent implements OnInit {
 
   checkoutForm = this.fb.group({
-    firstName: [""],
-    lastName: [""],
-    email: ["", Validators.email],
-    phoneNumber: [""],
-    orderNo: [""]
+    firstName: ["", Validators.required],
+    lastName: ["", Validators.required],
+    email: ["",Validators.required, Validators.email],
+    phoneNumber: ["", Validators.required],
+    orderNo: ["", Validators.required]
   })
   products: ProductsModel[] = undefined;
   tempOrderNo: string;

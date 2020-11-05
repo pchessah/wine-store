@@ -4,10 +4,12 @@
         <div fxLayout="column">
             <label for="firstName">First Name</label>
             <input  formControlName="firstName" type="text" required>
+            <div class="text-muted errorText" *ngIf="checkoutForm.get('firstName').hasError('required') && checkoutForm.get('firstName').touched">This field is required</div>
         </div>
         <div fxLayout="column">
             <label for="lastName">Last Name</label>
             <input  formControlName="lastName" type="text" required>
+            <div class="text-muted errorText" *ngIf="checkoutForm.get('lastName').hasError('required') && checkoutForm.get('lastName').touched">This field is required</div>
         </div>       
     </div>
     <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
@@ -15,11 +17,13 @@
         <div fxLayout="column">
             <label for="email">Your Email</label>
             <input  formControlName="email" type="email" required>
+            <div class="text-muted errorText" *ngIf="checkoutForm.get('email').hasError('required') && checkoutForm.get('email').touched">This field is required</div>
         </div>
        
         <div fxLayout="column">
             <label for="phoneNumber">Your Phone No</label>
             <input  formControlName="phoneNumber" type="number" required>
+            <div class="text-muted errorText" *ngIf="checkoutForm.get('phoneNumber').hasError('required') && checkoutForm.get('phoneNumber').touched">This field is required</div>
         </div>
        
     </div>
