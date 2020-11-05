@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { IOrders } from '../interfaces/iorders';
 import { ProductsService } from './products.service';
 
@@ -10,7 +9,6 @@ import { ProductsService } from './products.service';
 export class OrdersService {
 
   constructor(private firestore: AngularFirestore,
-              private fireStorage: AngularFireStorage,
               private productService: ProductsService) { }
 
 
