@@ -50,7 +50,7 @@ export class CheckoutComponent implements OnInit {
   cancelOrder(): void {
     if (confirm("Are you sure you want to cancel the order?")) {
       this.productsService.clearCart();
-      this.router.navigateByUrl("/home");
+      this.router.navigateByUrl("/");
     } else {
       this.router.navigateByUrl("/checkout")
     }
