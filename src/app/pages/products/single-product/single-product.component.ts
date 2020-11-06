@@ -34,9 +34,11 @@ export class SingleProductComponent implements OnInit {
     this._productService.getSingleProduct(id).subscribe((singleProduct : ProductsModel)=>{
       this.singleProduct = singleProduct;
       this._productService.addToCart(id);
-    })
-    
-    
+    })    
+  }
+
+  goBack(): void{
+    this.router.navigateByUrl("/products")
   }
 
 

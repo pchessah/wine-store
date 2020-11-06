@@ -70,4 +70,8 @@ export class CartComponent implements OnInit {
     }
   }
 
+  back(): void{
+    this.router.navigateByUrl("/products")
+  }
+
 }

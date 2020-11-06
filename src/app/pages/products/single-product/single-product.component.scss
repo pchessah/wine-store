@@ -1,22 +1,23 @@
 img{
-    height: 30%;
-    width: 30%;
+    height: 40%;
+    width: 50%;
 }
 
 .card{
-    margin: 5px 10%;
+    margin: 0px 10%;
 }
 
 button{
     width: 100%;
     margin: 0;
+    font-size: 15px !important;
 }
 
 .card-header{
-    background-color: #ADD8E6;
-    text-align: center;
+    background-color: #f7f7f7;
     font-weight: 600;
-    font-size: larger;
+    text-align: center;
+    font-size: 15px;
     width: 100%;
     margin: 0;
 }
@@ -24,3 +25,4 @@ button{
 .description{
     padding: 10px;
 }
+
