@@ -6,3 +6,9 @@ span{
 i{
     color: white !important;
 }
+
+@media only screen and (max-width: 400px){
+    i{
+        color: black !important;
+    }
+}

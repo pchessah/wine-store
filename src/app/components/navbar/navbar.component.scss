@@ -18,3 +18,15 @@ img{
 .navbar-toggler{
     color: white !important;
 }
+
+@media only screen and (max-width: 400px){
+    .navbar-toggler{
+        color: black !important;
+    }
+
+    nav{
+        background-color:transparent !important;
+        font-weight: 500;
+        color: black !important;
+    }
+}
