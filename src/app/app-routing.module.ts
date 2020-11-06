@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: "cart", component: CartComponent},
   {path: "checkout", component: CheckoutComponent},
   {path: "admin", component: DashboardComponent},
-  {path:"", redirectTo: "/home" , pathMatch: "full"},
+  {path:"", redirectTo: "/products" , pathMatch: "full"},
   {path:"**", component: ErrorPageComponent},
   
 

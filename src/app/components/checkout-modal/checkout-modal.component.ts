@@ -39,6 +39,8 @@ export class CheckoutModalComponent implements OnInit {
     grandTotal: undefined
   };
 
+  productsForAdmin: any;
+
 
 
   constructor(private fb: FormBuilder,
@@ -84,47 +86,56 @@ export class CheckoutModalComponent implements OnInit {
     this.emailToCustomer();
     this.emailToAdmin();
     this.dialogRef.close();
-    this.router.navigateByUrl("/home");
+    this.router.navigateByUrl("/");
+  }
+
+  getProductsForAdmin():void{
+
   }
 
   //EMAIL TO CUSTOMER
   emailToCustomer(): void {
-    const templateParams = {
-      to_email: this.order.email,
-      from_name: 'Asconi Wines',
-      message: `Your order ${this.order.orderNo} has been received and is being processed.`,
-      order_no: this.order.orderNo
-  };
+    this.order.products.map((item)=>{
+      console.log(item.productName)
+    });
+  //   const templateParams = {
+  //     to_email: this.order.email,
+  //     from_name: 'Asconi Wines',
+  //     message: `Your order ${this.order.orderNo} has been received and is being processed.`,
+  //     order_no: this.order.orderNo
+  // };
    
-  emailjs.send('service_csyz6nw','template_j0w73t8', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
-      .then((response) => {
-         console.log('SUCCESS!', response.status, response.text);
-      }, (err) => {
-         console.log('FAILED...', err);
-      });
+  // emailjs.send('service_csyz6nw','template_j0w73t8', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
+  //     .then((response) => {
+  //        console.log('SUCCESS!', response.status, response.text);
+  //     }, (err) => {
+  //        console.log('FAILED...', err);
+  //     });
   }
 
 
   //EMAIL TO ADMIN
   emailToAdmin():void{
-    const templateParams = {
-      customer_email: this.order.email,
-      customer_phone_no: this.order.phoneNumber,
-      message: this.order.products.filter(item=>{
-        return item.productName;
-      }),
-      grand_Total: this.order.grandTotal,
-      order_no: this.order.orderNo,
-      firstName: this.order.firstName,
-      lastName: this.order.lastName
-  };
+  //   const templateParams = {
+  //     customer_email: this.order.email,
+  //     customer_phone_no: this.order.phoneNumber,
+  //     message: this.order.products.filter(item=>{
+  //       return item.productName;
+  //     }),
+  //     grand_Total: this.order.grandTotal,
+  //     order_no: this.order.orderNo,
+  //     firstName: this.order.firstName,
+  //     lastName: this.order.lastName
+  // };
    
-  emailjs.send('service_csyz6nw','template_8gkys9i', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
-      .then((response) => {
-         console.log('SUCCESS!', response.status, response.text);
-      }, (err) => {
-         console.log('FAILED...', err);
-      });
+  // emailjs.send('service_csyz6nw','template_8gkys9i', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
+  //     .then((response) => {
+  //        console.log('SUCCESS!', response.status, response.text);
+  //     }, (err) => {
+  //        console.log('FAILED...', err);
+  //     });
+
+  
 
   }
 
