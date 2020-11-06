@@ -18,6 +18,7 @@
             <label for="email">Your Email</label>
             <input  formControlName="email" type="email" required>
             <div class="text-muted errorText" *ngIf="checkoutForm.get('email').hasError('required') && checkoutForm.get('email').touched">This field is required</div>
+            <div class="text-muted errorText" *ngIf="checkoutForm.get('email').hasError('email') && checkoutForm.get('email').touched">Enter Email correctly</div>
         </div>
        
         <div fxLayout="column">

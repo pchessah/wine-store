@@ -39,7 +39,9 @@ export class CheckoutModalComponent implements OnInit {
     grandTotal: undefined
   };
 
-  productsForAdmin: any;
+  productsForAdmin: string;
+  whatsAppUrl: string;
+  whatsAppMessage: string ;
 
 
 
@@ -83,14 +85,38 @@ export class CheckoutModalComponent implements OnInit {
 
     this.orderService.submitOrder(this.order);
     this.toastr.success(`Order number: ${this.order.orderNo} submitted. An email has been sent to ${this.order.email}`)
+    this.getProductsForAdmin();
     this.emailToCustomer();
     this.emailToAdmin();
+    this.whatsappAdmin();
     this.dialogRef.close();
     this.router.navigateByUrl("/");
   }
 
   getProductsForAdmin():void{
+    let products = this.order.products.map((item)=> item["productName"])
+    products.sort();
+    let finalProductCount = "";
 
+    let current = null;
+    let count = 0;
+
+    for(let i=0; i<products.length; i++){
+      if(products[i] != current){
+        if (count>0){
+          finalProductCount += ` \n Product: ${current} Quantity: ${count}, `
+        }
+        current = products[i];
+        count = 1;
+      } else {
+        count ++;
+      }
+    }
+    if(count > 0){
+      finalProductCount += ` \n Product: ${current}, Quantity: ${count}  `
+    }
+   this.productsForAdmin = finalProductCount;
+   
   }
 
   //EMAIL TO CUSTOMER
@@ -98,46 +124,47 @@ export class CheckoutModalComponent implements OnInit {
     this.order.products.map((item)=>{
       console.log(item.productName)
     });
-  //   const templateParams = {
-  //     to_email: this.order.email,
-  //     from_name: 'Asconi Wines',
-  //     message: `Your order ${this.order.orderNo} has been received and is being processed.`,
-  //     order_no: this.order.orderNo
-  // };
+    const templateParams = {
+      to_email: this.order.email,
+      from_name: 'Asconi Wines',
+      message: `Your order has been received and is being processed.`,
+      order: this.productsForAdmin,
+      order_no: this.order.orderNo
+  };
    
-  // emailjs.send('service_csyz6nw','template_j0w73t8', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
-  //     .then((response) => {
-  //        console.log('SUCCESS!', response.status, response.text);
-  //     }, (err) => {
-  //        console.log('FAILED...', err);
-  //     });
+  emailjs.send('service_csyz6nw','template_j0w73t8', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
+      .then((response) => {
+         console.log('SUCCESS!', response.status, response.text);
+      }, (err) => {
+         console.log('FAILED...', err);
+      });
   }
 
 
   //EMAIL TO ADMIN
   emailToAdmin():void{
-  //   const templateParams = {
-  //     customer_email: this.order.email,
-  //     customer_phone_no: this.order.phoneNumber,
-  //     message: this.order.products.filter(item=>{
-  //       return item.productName;
-  //     }),
-  //     grand_Total: this.order.grandTotal,
-  //     order_no: this.order.orderNo,
-  //     firstName: this.order.firstName,
-  //     lastName: this.order.lastName
-  // };
+    const templateParams = {
+      customer_email: this.order.email,
+      customer_phone_no: this.order.phoneNumber,
+      message: this.productsForAdmin,
+      grand_Total: this.order.grandTotal,
+      order_no: this.order.orderNo,
+      firstName: this.order.firstName,
+      lastName: this.order.lastName
+  };
    
-  // emailjs.send('service_csyz6nw','template_8gkys9i', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
-  //     .then((response) => {
-  //        console.log('SUCCESS!', response.status, response.text);
-  //     }, (err) => {
-  //        console.log('FAILED...', err);
-  //     });
-
-  
-
+  emailjs.send('service_csyz6nw','template_8gkys9i', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
+      .then((response) => {
+         console.log('SUCCESS!', response.status, response.text);
+      }, (err) => {
+         console.log('FAILED...', err);
+      });
   }
 
-
+  //SEND TO ADMIN WHATSAPP
+  whatsappAdmin(): void{
+    this.whatsAppMessage = `Hi, my name is ${this.order.firstName} ${this.order.lastName}. I would like the following wines from your site: ${this.productsForAdmin}`
+    this.whatsAppUrl = `https://api.whatsapp.com/send?phone=254704987850&text=%20${this.whatsAppMessage}`
+    window.open(this.whatsAppUrl, "_blank")
+  }
 }
