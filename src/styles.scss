@@ -9,7 +9,21 @@
 @import '~bootstrap/scss/mixins';
 @import '~ngx-toastr/toastr-bs4-alert';
 
+// body{
+//     background-image: url("./assets/asconi/bg.jpg") !important;
+// }
+
 body{
-    background-image: url("./assets/asconi/bg.jpg") !important;
-}
+    height:100%; 
+    //background-size:cover !important;
+    width:auto;
+    background:url('./assets/asconi/bg.jpg') no-repeat;
+    background-position: center center;
+    background-size:100% 500%;
+  }
+
+  
+
+
+
 

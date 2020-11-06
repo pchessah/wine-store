@@ -43,13 +43,13 @@
     <div class="total" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="dataSource && cart?.length>0">
         <span class="m-1 total-value text-center">Total: Ksh {{grandTotal}}</span>
         <span><button class="btn btn-success m-1" (click)="checkout()">Proceed to checkout</button></span>
-        <span><button class="btn btn-outline-success m-1" (click)="checkout()">Back</button></span>
+        <span><button class="btn btn-info m-1" (click)="checkout()">Back</button></span>
         <span><button class="btn btn-danger m-1" (click)="clearCart()">Clear Cart</button></span>
     </div>
 
     <ng-template #notLoaded>
         <div fxLayout="column" fxLayoutAlign="center center">
-            <h5 class="text-center"> No Products in cart </h5>
+            <h5 class="text-center text-white"> No Products in cart </h5>
             <a class="btn btn-primary" [routerLink]="['/products']" routerLinkActive="router-link-active">Go to products
                 page</a>
         </div>

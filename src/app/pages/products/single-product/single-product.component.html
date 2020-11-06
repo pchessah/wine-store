@@ -4,21 +4,19 @@
             {{singleProduct?.productName}}
         </span>
         <span>
-           Ksh. {{singleProduct?.price}}
+            Ksh. {{singleProduct?.price}}
         </span>
     </div>
-    <div>
-        <div fxLayout="row" fxLayoutAlign="center center">
-            <img [src]="singleProduct?.imgUrl" alt="single-product-img">
-        </div>
-        <div>
-            <button class="btn btn-lg badge-success" (click)="addToCart()" fxLayout="row"
-                fxLayoutAlign="space-around center">
-                <i class="fas fa-cart-plus"></i>
-            </button>
-            <button (click)="goBack()" class="btn btn-lg btn-outline-info">
-                Back
-            </button>
-        </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <img [src]="singleProduct?.imgUrl" alt="single-product-img">
+    </div>
+    <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+        <button class="btn btn-lg badge-success m-1" (click)="addToCart()" fxLayout="row"
+            fxLayoutAlign="space-around center">
+            <i class="fas fa-cart-plus"></i>
+        </button>
+        <button (click)="goBack()" class="btn btn-lg badge-info m-1">
+            Back
+        </button>
     </div>
 </div>
