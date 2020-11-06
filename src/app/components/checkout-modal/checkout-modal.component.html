@@ -35,7 +35,10 @@
     </div>
     <div class="text-center" fxLayout="column"fxLayoutAlign="center center">
         <button (click)="submitOrder()" class="btn btn-success m-2" type="submit" [disabled]="!checkoutForm.valid" >
-            Complete Order
+            <i class="far fa-envelope p-1 m-1"></i>Order via email
+        </button>
+        <button (click)="whatsappAdmin()" class="btn btn-outline-success m-2" type="submit" [disabled]="!checkoutForm.valid">
+            <i class="fab fa-whatsapp p-1 m-1"></i>Order via Whatsapp
         </button>
         <button (click)="cancelOrder()" class="btn btn-outline-danger m-2">
             Cancel order
