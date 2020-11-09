@@ -33,7 +33,6 @@
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
     "angular-bootstrap-md": "^10.0.0",
-    "angular-in-memory-web-api": "^0.11.0",
     "bootstrap": "^4.5.3",
     "emailjs-com": "^2.6.3",
     "firebase": "^7.24.0",
@@ -52,7 +51,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": ">= 0.900 < 0.1100",
-    "@angular-devkit/build-angular": "^0.1001.7",
+    "@angular-devkit/build-angular": "^0.1002.0",
     "@angular/cli": "^10.1.7",
     "@angular/compiler-cli": "^10.1.6",
     "@types/jasmine": "~3.5.0",
