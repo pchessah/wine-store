@@ -121,9 +121,6 @@ export class CheckoutModalComponent implements OnInit {
 
   //EMAIL TO CUSTOMER
   emailToCustomer(): void {
-    this.order.products.map((item) => {
-      console.log(item.productName)
-    });
     const templateParams = {
       to_email: this.order.email,
       from_name: 'Asconi Wines',
@@ -180,5 +177,9 @@ export class CheckoutModalComponent implements OnInit {
 
     this.dialogRef.close();
     this.router.navigateByUrl("/");
+  }
+
+  close():void{
+    this.dialogRef.close();
   }
 }

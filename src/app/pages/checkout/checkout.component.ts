@@ -61,11 +61,6 @@ export class CheckoutComponent implements OnInit {
       width: '550px',
       data: {products: this.cart, total: this.grandTotal, cartWithNumber: this.displayCart}
     })
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      
-    });
   }
 
 }

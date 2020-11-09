@@ -1,5 +1,8 @@
 <form [formGroup]="checkoutForm" fxLayout="column">
-    <h5 class="text-center">Check Out</h5>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <h5 class="text-center">Check Out</h5>
+        <i (click)="close()" class="far fa-times-circle"></i>
+    </div>
     <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
         <div fxLayout="column">
             <label for="firstName">First Name</label>

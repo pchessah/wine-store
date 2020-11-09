@@ -75,7 +75,7 @@ import { CheckoutModalComponent } from './components/checkout-modal/checkout-mod
     HttpClientModule,
     ReactiveFormsModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule
   ],
   providers: [],
