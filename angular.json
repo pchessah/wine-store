@@ -133,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "sport-store"
+  "defaultProject": "sport-store",
+  "cli": {
+    "analytics": "9781375e-d0ad-4eb7-adb7-39c430502290"
+  }
 }

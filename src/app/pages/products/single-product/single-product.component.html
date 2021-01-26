@@ -10,13 +10,19 @@
     <div fxLayout="row" fxLayoutAlign="center center">
         <img [src]="singleProduct?.imgUrl" alt="single-product-img">
     </div>
+    <div class="description" fxFill>
+        <strong>Details: </strong>
+        <p>{{singleProduct?.description}}</p>
+    </div>
     <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
         <button class="btn btn-lg badge-success m-1" (click)="addToCart()" fxLayout="row"
             fxLayoutAlign="space-around center">
             <i class="fas fa-cart-plus"></i>
         </button>
-        <button (click)="goBack()" class="btn btn-lg badge-info m-1">
-            Back
+
+        <button class="btn btn-lg badge-info m-1" (click)="goBack()" fxLayout="row"
+            fxLayoutAlign="space-around center">
+            <i class="fas fa-angle-double-left"></i>
         </button>
     </div>
 </div>
