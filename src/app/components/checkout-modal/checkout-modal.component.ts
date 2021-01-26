@@ -129,7 +129,7 @@ export class CheckoutModalComponent implements OnInit {
       order_no: this.order.orderNo
     };
 
-    emailjs.send('service_csyz6nw', 'template_j0w73t8', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
+    emailjs.send('service_vspckw9', 'template_5pegs3f', templateParams, 'user_jqv22nq1EoErcPSB7fv8A')
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);
       }, (err) => {
@@ -150,7 +150,7 @@ export class CheckoutModalComponent implements OnInit {
       lastName: this.order.lastName
     };
 
-    emailjs.send('service_csyz6nw', 'template_8gkys9i', templateParams, 'user_s3GXm5gpAGyKt7rNl9Qfb')
+    emailjs.send('service_vspckw9', 'template_zpo9m5r', templateParams, 'user_jqv22nq1EoErcPSB7fv8A')
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);
       }, (err) => {
