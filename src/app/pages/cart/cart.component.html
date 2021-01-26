@@ -10,7 +10,7 @@
 
 
         <ng-container matColumnDef="number">
-            <th mat-header-cell *matHeaderCellDef> Number </th>
+            <th mat-header-cell *matHeaderCellDef> Number of Cartons/cases </th>
             <td class="numberCell" mat-cell *matCellDef="let element" fxLayout="column wrap" fxLayoutAlign="center center">
                 <button (click)="addOneItem(element[0].productId)" class="action-btn m-1">+</button>
                 <span class="m-1">{{element[1]}}</span>
