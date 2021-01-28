@@ -3,44 +3,122 @@
         <h5 class="text-center">Check Out</h5>
         <i (click)="close()" class="far fa-times-circle"></i>
     </div>
-    <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
         <div fxLayout="column">
             <label for="firstName">First Name</label>
-            <input  formControlName="firstName" type="text" required>
-            <div class="text-muted errorText" *ngIf="checkoutForm.get('firstName').hasError('required') && checkoutForm.get('firstName').touched">This field is required</div>
+            <input formControlName="firstName" type="text" required>
+            <div class="text-muted errorText"
+                *ngIf="checkoutForm.get('firstName').hasError('required') && checkoutForm.get('firstName').touched">This
+                field is required</div>
         </div>
         <div fxLayout="column">
             <label for="lastName">Last Name</label>
-            <input  formControlName="lastName" type="text" required>
-            <div class="text-muted errorText" *ngIf="checkoutForm.get('lastName').hasError('required') && checkoutForm.get('lastName').touched">This field is required</div>
-        </div>       
+            <input formControlName="lastName" type="text" required>
+            <div class="text-muted errorText"
+                *ngIf="checkoutForm.get('lastName').hasError('required') && checkoutForm.get('lastName').touched">This
+                field is required</div>
+        </div>
     </div>
-    <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
-        
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+
         <div fxLayout="column">
             <label for="email">Your Email</label>
-            <input  formControlName="email" type="email" required>
-            <div class="text-muted errorText" *ngIf="checkoutForm.get('email').hasError('required') && checkoutForm.get('email').touched">This field is required</div>
-            <div class="text-muted errorText" *ngIf="checkoutForm.get('email').hasError('email') && checkoutForm.get('email').touched">Enter Email correctly</div>
+            <input formControlName="email" type="email" required>
+            <div class="text-muted errorText"
+                *ngIf="checkoutForm.get('email').hasError('required') && checkoutForm.get('email').touched">This field
+                is required</div>
+            <div class="text-muted errorText"
+                *ngIf="checkoutForm.get('email').hasError('email') && checkoutForm.get('email').touched">Enter Email
+                correctly</div>
         </div>
-       
+
         <div fxLayout="column">
             <label for="phoneNumber">Your Phone No</label>
-            <input  formControlName="phoneNumber" type="number" required>
-            <div class="text-muted errorText" *ngIf="checkoutForm.get('phoneNumber').hasError('required') && checkoutForm.get('phoneNumber').touched">This field is required</div>
+            <input formControlName="phoneNumber" type="number" required>
+            <div class="text-muted errorText"
+                *ngIf="checkoutForm.get('phoneNumber').hasError('required') && checkoutForm.get('phoneNumber').touched">
+                This field is required</div>
         </div>
-       
+
     </div>
-    <div fxLayout="row wrap"fxLayoutAlign="space-evenly center">
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <div fxLayout="column">
+            <label for="county">County</label>
+            <select formControlName="county">
+                <option value="baringo">Baringo</option>
+                <option value="bomet">Bomet</option>
+                <option value="bungoma">Bungoma</option>
+                <option value="busia">Busia</option>
+                <option value="elgeyo marakwet">Elgeyo Marakwet</option>
+                <option value="embu">Embu</option>
+                <option value="garissa">Garissa</option>
+                <option value="homa bay">Homa Bay</option>
+                <option value="isiolo">Isiolo</option>
+                <option value="kajiado">Kajiado</option>
+                <option value="kakamega">Kakamega</option>
+                <option value="kericho">Kericho</option>
+                <option value="kiambu">Kiambu</option>
+                <option value="kilifi">Kilifi</option>
+                <option value="kirinyaga">Kirinyaga</option>
+                <option value="kisii">Kisii</option>
+                <option value="kisumu">Kisumu</option>
+                <option value="kitui">Kitui</option>
+                <option value="kwale">Kwale</option>
+                <option value="laikipia">Laikipia</option>
+                <option value="lamu">Lamu</option>
+                <option value="machakos">Machakos</option>
+                <option value="makueni">Makueni</option>
+                <option value="mandera">Mandera</option>
+                <option value="meru">Meru</option>
+                <option value="migori">Migori</option>
+                <option value="marsabit">Marsabit</option>
+                <option value="mombasa">Mombasa</option>
+                <option value="muranga">Muranga</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="nakuru">Nakuru</option>
+                <option value="nandi">Nandi</option>
+                <option value="narok">Narok</option>
+                <option value="nyamira">Nyamira</option>
+                <option value="nyandarua">Nyandarua</option>
+                <option value="nyeri">Nyeri</option>
+                <option value="samburu">Samburu</option>
+                <option value="siaya">Siaya</option>
+                <option value="taita taveta">Taita Taveta</option>
+                <option value="tana river">Tana River</option>
+                <option value="tharaka nithi">Tharaka Nithi</option>
+                <option value="trans nzoia">Trans Nzoia</option>
+                <option value="turkana">Turkana</option>
+                <option value="uasin gishu">Uasin Gishu</option>
+                <option value="vihiga">Vihiga</option>
+                <option value="wajir">Wajir</option>
+                <option value="pokot">West Pokot</option>
+            </select>
+            <div class="text-muted errorText" *ngIf="checkoutForm.get('county').hasError('required') && checkoutForm.get('county').touched">
+                This field is required
+            </div>            
+        </div>
+
+        <div fxLayout="column">
+            <label for="deliveryAddress">Delivery Address</label>
+            <input formControlName="deliveryAddress" type="text" required>
+            <div class="text-muted errorText" *ngIf="checkoutForm.get('deliveryAddress').hasError('required') && checkoutForm.get('deliveryAddress').touched">
+                This field is required
+            </div>
+        </div>
+    </div>
+    
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
         <span class="btn btn-warning m-2">
             Total:Ksh. {{data.total}}
         </span>
     </div>
-    <div class="text-center" fxLayout="column"fxLayoutAlign="center center">
-        <button (click)="submitOrder()" class="btn btn-success m-2" type="submit" [disabled]="!checkoutForm.valid" >
+    <div class="text-center" fxLayout="column" fxLayoutAlign="center center">
+        <button (click)="submitOrder()" class="btn btn-success m-2" type="submit" [disabled]="!checkoutForm.valid">
             <i class="far fa-envelope p-1 m-1"></i>Order via email
         </button>
-        <button (click)="whatsappAdmin()" class="btn btn-outline-success m-2" type="submit" [disabled]="!checkoutForm.valid">
+        <button (click)="whatsappAdmin()" class="btn btn-outline-success m-2" type="submit"
+            [disabled]="!checkoutForm.valid">
             <i class="fab fa-whatsapp p-1 m-1"></i>Order via Whatsapp
         </button>
         <button (click)="cancelOrder()" class="btn btn-outline-danger m-2">

@@ -8,4 +8,6 @@ export interface IOrders{
     phoneNumber: "number";
     firstName: "string";
     lastName: "string";
+    county: string;
+    deliveryAddress: string;
 }
