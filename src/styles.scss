@@ -1,36 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-@import '~@angular/material/prebuilt-themes/indigo-pink.css'; //make modal work, material ui
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; //make modal work, material ui
 
-@import '~ngx-toastr/toastr'; //for toast
+@import "~ngx-toastr/toastr"; //for toast
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-@import '~ngx-toastr/toastr-bs4-alert';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~ngx-toastr/toastr-bs4-alert";
 
 // body{
 //     background-image: url("./assets/asconi/bg.jpg") !important;
 // }
 
-body{
-  min-height:100%;
-    height:100%; 
-    //background-size:cover !important;
-    width:auto;
-    background:url('./assets/asconi/bg.jpg') no-repeat;
-    background-position: center center;
-    background-size:100% 500%;
-   
-  }
-  @media only screen and (max-width: 400px){
-    body{
-      background-size: 100% 100% !important;
-    }
+body {
+  min-height: 100vh;
+  height: 100vh;
+  background-size: cover !important;
+  width: auto;
+  background: url("./assets/asconi/bg.jpg") no-repeat;
+  background-position: center center;
+  // background-size:100% 500%;
+ 
 }
-
-  
-
-
-
-
+@media only screen and (max-width: 400px) {
+  body {
+    background-size: 100% 100% !important;
+  }
+}
