@@ -5,6 +5,10 @@ span{
     font-size: smaller;
 }
 
+span:hover, i:hover{
+    color: white !important;
+}
+
 i{
     color: black !important;
     font-size: 14px;

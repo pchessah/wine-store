@@ -24,10 +24,17 @@ img{
 
 li{
     font-size: 20px;
+    cursor: pointer;
+    color: black !important;
+}
+
+a:hover{
+    color: white !important;
 }
 
 a{
     margin-top: 1.5px;
+    color: black !important;
 }
 
 @media only screen and (max-width: 400px){
