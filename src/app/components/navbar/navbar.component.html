@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" fxLayout="row" fxLayoutAlign="space-between">
   <a class="navbar-brand" [routerLink]="'/'"> <img src="../../../assets/asconi/wine-logo.jpg" alt="logo"> Wine Store</a>
 
   <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
@@ -6,15 +6,16 @@
   </button>
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
     <ul class="navbar-nav navbar-nav ml-auto">
+      <li class="nav-item cart-badge">
+        <app-cart-badge></app-cart-badge>
+      </li>
+
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="'/products'" (click)="isMenuCollapsed = true">Products</a>
+        <a class="nav-link" [routerLink]="'/products'" (click)="isMenuCollapsed = true">All Wines</a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" [routerLink]="'/about-us'" (click)="isMenuCollapsed = true">About</a>
       </li> -->
-      <li class="nav-item">
-        <app-cart-badge></app-cart-badge>
-      </li>
 
       <!-- PUT GUARD TO ONLY SHOW IF ADMIN HAS LOGGED IN, ENABLE TO ADD PRODUCTS -->
 
