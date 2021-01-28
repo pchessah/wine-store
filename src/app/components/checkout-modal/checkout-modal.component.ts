@@ -200,7 +200,7 @@ export class CheckoutModalComponent implements OnInit {
     this.getProductsForAdmin()
 
     this.whatsAppMessage = `Hi, my name is ${this.order.firstName} ${this.order.lastName}. I would like the following wines from your site: ${this.productsForAdmin} delivered at ${this.order.deliveryAddress} in ${this.order.county}county which comes to a grand total of ${this.order.grandTotal}`
-    this.whatsAppUrl = `https://api.whatsapp.com/send?phone=254704987850&text=%20${this.whatsAppMessage}`
+    this.whatsAppUrl = `https://api.whatsapp.com/send?phone=254710172473&text=%20${this.whatsAppMessage}`
     window.open(this.whatsAppUrl, '_blank')
 
     this.dialogRef.close()
