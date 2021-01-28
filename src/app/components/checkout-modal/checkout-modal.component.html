@@ -20,7 +20,6 @@
         </div>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-
         <div fxLayout="column">
             <label for="email">Your Email</label>
             <input formControlName="email" type="email" required>
@@ -39,11 +38,10 @@
                 *ngIf="checkoutForm.get('phoneNumber').hasError('required') && checkoutForm.get('phoneNumber').touched">
                 This field is required</div>
         </div>
+    </div> 
 
-    </div>
-
-    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-        <div fxLayout="column">
+    <div class="county" fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <div  fxLayout="column" fxFill>
             <label for="county">County</label>
             <select formControlName="county">
                 <option value="baringo">Baringo</option>
@@ -97,17 +95,19 @@
             <div class="text-muted errorText" *ngIf="checkoutForm.get('county').hasError('required') && checkoutForm.get('county').touched">
                 This field is required
             </div>            
-        </div>
+        </div>     
+    </div>
 
-        <div fxLayout="column">
-            <label for="deliveryAddress">Delivery Address</label>
-            <input formControlName="deliveryAddress" type="text" required>
+    <div class="address" fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <div fxLayout="column" fxFill>
+            <label for="deliveryAddress">Preferred Delivery Location</label>
+             <textarea formControlName="deliveryAddress" type="text" required></textarea>
             <div class="text-muted errorText" *ngIf="checkoutForm.get('deliveryAddress').hasError('required') && checkoutForm.get('deliveryAddress').touched">
                 This field is required
             </div>
         </div>
     </div>
-    
+
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
         <span class="btn btn-warning m-2">
             Total:Ksh. {{data.total}}

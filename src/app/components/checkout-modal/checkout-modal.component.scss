@@ -3,7 +3,7 @@ label{
     font-weight: 300;
 }
 
-input, select {
+input, select, textarea {
     border: none;
     padding: 5px 20px;
     background-color: aliceblue;
@@ -28,4 +28,9 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.address, .county{
+  margin-left: 25px;
+  margin-right: 25px;
 }
