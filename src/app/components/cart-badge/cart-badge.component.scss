@@ -3,6 +3,8 @@ span{
     margin-top: 8px; 
     color: black !important;
     font-size: smaller;
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
 }
 
 span:hover, i:hover{
@@ -13,6 +15,7 @@ i{
     color: black !important;
     font-size: 14px;
     margin: 10px;
+    font-weight: 600;
 }
 
 @media only screen and (max-width: 400px){

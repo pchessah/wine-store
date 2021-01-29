@@ -8,10 +8,8 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~ngx-toastr/toastr-bs4-alert";
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
-// body{
-//     background-image: url("./assets/asconi/bg.jpg") !important;
-// }
 
 body {
   min-height: 100vh;
@@ -20,8 +18,7 @@ body {
   width: auto;
   background: url("./assets/images/bg.jpg") no-repeat;
   background-position: center center;
-  // background-size:100% 500%;
- 
+  font-family: 'Caveat', cursive; 
 }
 @media only screen and (max-width: 400px) {
   body {

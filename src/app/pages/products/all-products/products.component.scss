@@ -22,6 +22,8 @@ img{
     cursor: pointer;
     font-weight: 700;
     font-size: smaller;
+    font-family: 'Caveat', cursive;
+    text-transform: capitalize;
 }
 
 .btn{
@@ -50,6 +52,10 @@ i{
 .card-holder, .product-body{
     padding: 0;
     border: none;
+}
+
+button{
+    font-family: 'Caveat', cursive;
 }
 
 
