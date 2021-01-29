@@ -10,7 +10,9 @@ import { ProductsService } from 'src/app/libs/services/products.service'
 import { v4 as uniqueId } from 'uuid'
 import { init } from 'emailjs-com'
 import emailjs from 'emailjs-com'
-init('user_s3GXm5gpAGyKt7rNl9Qfb')
+init('user_jqv22nq1EoErcPSB7fv8A')
+
+
 
 @Component({
   selector: 'app-checkout-modal',
