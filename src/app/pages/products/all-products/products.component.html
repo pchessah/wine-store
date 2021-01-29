@@ -2,7 +2,7 @@
 
     <div class="products-body d-flex align-items-center justify-content-center">
         <div class="card-holder container row d-flex align-items-center justify-content-center">
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12" *ngFor="let singleProduct of products">
+            <div class="card col-xl-4 col-lg-4 col-md-6 col-sm-12" *ngFor="let singleProduct of products">
                 <div class="card-header" [routerLink]="['/products', singleProduct.id]"
                     routerLinkActive="router-link-active">
                    {{singleProduct.productName }}
@@ -23,7 +23,7 @@
             </div>
 
 
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12" *ngFor="let singleProduct of products">
+            <!-- <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12" *ngFor="let singleProduct of products">
                 <div class="card-header" [routerLink]="['/products', singleProduct.id]"
                     routerLinkActive="router-link-active">
                    Asconi Kagor Lux 
@@ -178,13 +178,9 @@
                 <div class="card-footer" fxLayout="row" fxLayoutAlign="space-between center">
                     <p class="price">Price: <span class="badge">Ksh. 4800</span></p>
                     <p>Qty: <span class="badge">6 Bottles</span> </p>
-                </div>
+                </div> -->
 
-                <button class="cart-btn" fxLayout="row" fxLayoutAlign="center center" fxFill class="btn btn-sm badge-success"
-                    (click)="addToCart(singleProduct.id)">
-                    <i class="fas fa-cart-plus"></i> Add to cart
-                </button>
-            </div>
+         
         </div>
 
       
