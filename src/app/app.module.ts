@@ -57,7 +57,7 @@ import { CheckoutModalComponent } from './components/checkout-modal/checkout-mod
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({ closeButton: true, progressBar: true, positionClass:'toast-top-center', messageClass: "toastMessage"}),
+    ToastrModule.forRoot({ closeButton: true, progressBar: true, positionClass:'toast-top-center', messageClass: "toastMessage", timeOut: 1500}),
     NgbCollapseModule,
     FlexLayoutModule,
     MatDialogModule,
