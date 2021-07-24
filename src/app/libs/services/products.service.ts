@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http'
 import { Injectable, OnInit } from '@angular/core'
-import { BehaviorSubject, Subject, throwError } from 'rxjs'
+import { BehaviorSubject, throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 import { AngularFirestore } from '@angular/fire/firestore'
 import { ProductsModel } from '../models/products-model'
